@@ -16,6 +16,13 @@ export const metadata: Metadata = {
   title: "Jitto Joseph",
   description:
     "Software Engineer with a passion for building scalable, user-centric applications.",
+  openGraph: {
+    title: "Jitto Joseph",
+    description:
+      "Software Engineer with a passion for building scalable, user-centric applications.",
+    type: "website",
+    siteName: "Jitto Joseph Portfolio",
+  },
 };
 
 export default function RootLayout({
