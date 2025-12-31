@@ -35,11 +35,11 @@ export default function ProjectCard({ project }: { project: Project }) {
           {project.description}
         </p>
 
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-4 flex flex-wrap gap-1">
           {project.tech.map((t) => (
             <span
               key={t}
-              className="rounded-md bg-zinc-800 px-2 py-1 text-[10px] font-medium text-zinc-300 border border-zinc-700/50 uppercase tracking-wider"
+              className="rounded-md bg-zinc-800 px-1.5 py-0.5 text-[9px] font-medium text-zinc-300 border border-zinc-700/50 uppercase tracking-wider"
             >
               {t}
             </span>

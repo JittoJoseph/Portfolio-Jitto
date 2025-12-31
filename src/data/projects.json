@@ -47,7 +47,41 @@
         "href": "https://github.com/JittoJoseph/FlowLens-Devops-Intelligence",
         "icon": "github"
       }
-    ]  },
+    ]  
+  },
+  {
+    "title": "DevMetric - GitHub Profile Scorer",
+    "description": "Analyze GitHub profiles and get comprehensive developer metrics based on repositories, contributions, code quality, and impact.",
+    "image": "/devmetric.png",
+    "tech": [],
+    "links": [
+      {
+        "label": "Website",
+        "href": "https://dev-metric.vercel.app/",
+        "icon": "globe"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "title": "COREX - The Tech Fest",
+    "description": "Modern web platform for showcasing tech fest events at BVM Holy Cross College.",
+    "image": "/corex.png",
+    "tech": ["Next.js 15", "Tailwind CSS", "TypeScript"],
+    "links": [
+      {
+        "label": "Website",
+        "href": "https://bvmtechfest.com/",
+        "icon": "globe"
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/JittoJoseph/BVM-TicketingPlatform",
+        "icon": "github"
+      }
+    ],
+    "featured": true
+  },
   {
     "title": "QuizzLab",
     "description": "AI quiz generation platform using Gemini AI for instant personalized quizzes.",
