@@ -57,7 +57,7 @@
   },
   {
     "title": "DevMetric - GitHub Profile Scorer",
-    "description": "Analyze GitHub profiles and get comprehensive developer metrics based on repositories, contributions, code quality, and impact.",
+    "description": "Comprehensive GitHub profile analyzer for developer metrics.",
     "image": "/devmetric.png",
     "tech": ["Nextjs", "websockets", "TailwindCSS"],
     "links": [

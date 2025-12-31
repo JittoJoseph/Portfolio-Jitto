@@ -29,14 +29,14 @@
     ],
     "links": [
       {
-        "label": "BEACON LinkedIn",
-        "href": "https://www.linkedin.com/company/beacon-bvm",
-        "icon": "linkedin"
-      },
-      {
         "label": "COREX 2026",
         "href": "https://bvmtechfest.com/",
         "icon": "globe"
+      },
+      {
+        "label": "BEACON LinkedIn",
+        "href": "https://www.linkedin.com/company/beacon-bvm",
+        "icon": "linkedin"
       }
     ]
   }
