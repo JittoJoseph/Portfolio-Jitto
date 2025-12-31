@@ -1,20 +1,64 @@
 [
+    {
+    "title": "SpacialMeet",
+    "description": "A real-time video conferencing application with spatial audio and interactive features.",
+    "image": "/spacialmeet.png",
+    "tech": ["Spring Boot", "WebRTC", "Nextjs"],
+    "links": [
+      {
+        "label": "Website",
+        "href": "https://spacialmeet.vercel.app/",
+        "icon": "globe"
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/JittoJoseph/SpacialMeet",
+        "icon": "github"
+      }
+    ],
+    "featured": true
+  },
   {
     "title": "Endurance Protocol",
     "description": "3D asteroid impact simulator using NASA NeoWs API and Three.js.",
-    "link": "https://endurance-protocol.vercel.app/",
-    "tech": ["Three.js", "NASA API", "Next.js"]
+    "image": "/endurance-protocol.png",
+    "tech": ["Three.js", "NASA API", "Next.js"],
+    "links": [
+      {
+        "label": "Website",
+        "href": "https://endurance-protocol.vercel.app/",
+        "icon": "globe"
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/JittoJoseph/Endurance-Protocol",
+        "icon": "github"
+      }
+    ],
+    "featured": true
   },
   {
     "title": "FlowLens",
     "description": "AI-powered DevOps intelligence platform for real-time CI/CD optimization.",
-    "link": "https://github.com/JittoJoseph/FlowLens-Devops-Intelligence",
-    "tech": ["Flutter", "Node.js", "Python"]
-  },
+    "tech": ["Flutter", "Node.js", "Python"],
+    "links": [
+      {
+        "label": "Source",
+        "href": "https://github.com/JittoJoseph/FlowLens-Devops-Intelligence",
+        "icon": "github"
+      }
+    ]  },
   {
     "title": "QuizzLab",
     "description": "AI quiz generation platform using Gemini AI for instant personalized quizzes.",
-    "link": "https://quizzlab.vercel.app/",
-    "tech": ["React", "Firebase", "Gemini AI"]
+    "tech": ["React", "Firebase", "Gemini AI"],
+    "links": [
+      {
+        "label": "Website",
+        "href": "https://quizzlab.vercel.app/",
+        "icon": "globe"
+      }
+    ],
+    "featured": false
   }
 ]
