@@ -16,5 +16,28 @@
         "icon": "globe"
       }
     ]
+  },
+  {
+    "company": "BEACON – Computer Applications",
+    "role": "Development Lead",
+    "period": "Jun 2025 - Present",
+    "image": "/beacon.jpg",
+    "bullets": [
+      "Led technical development initiatives for the department association",
+      "Owned end-to-end development of the COREX 2026 Tech Fest platform",
+      "Built and deployed the official website with event listings and registrations"
+    ],
+    "links": [
+      {
+        "label": "BEACON LinkedIn",
+        "href": "https://www.linkedin.com/company/beacon-bvm",
+        "icon": "linkedin"
+      },
+      {
+        "label": "COREX 2026",
+        "href": "https://bvmtechfest.com/",
+        "icon": "globe"
+      }
+    ]
   }
 ]

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { GlobeIcon, LinkIcon } from "./Icons";
+import { GlobeIcon, LinkIcon, LinkedInIcon } from "./Icons";
 
 type Link = {
   label: string;
@@ -65,7 +65,7 @@ export default function ExperienceTabs({
 
             {/* Timeline logo or dot */}
             {item.image ? (
-              <div className="absolute left-[0px] top-0 h-10 w-10 rounded-lg overflow-hidden border-2 border-zinc-900 bg-zinc-800">
+              <div className="absolute left-[0px] top-0 h-10 w-10 rounded-lg overflow-hidden">
                 <Image
                   src={item.image}
                   alt={item.company || item.institution || "Logo"}
@@ -112,6 +112,8 @@ export default function ExperienceTabs({
                   >
                     {link.icon === "globe" ? (
                       <GlobeIcon className="h-3 w-3" />
+                    ) : link.icon === "linkedin" ? (
+                      <LinkedInIcon className="h-3 w-3" />
                     ) : (
                       <LinkIcon className="h-3 w-3" />
                     )}
