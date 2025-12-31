@@ -89,14 +89,15 @@
     "featured": true
   },
   {
-    "title": "QuizzLab",
-    "description": "AI quiz generation platform using Gemini AI for instant personalized quizzes.",
-    "tech": ["React", "Firebase", "Gemini AI"],
+    "title": "Google Forms MCQ Auto-Answer",
+    "description": "AI tool for auto-filling MCQ questions in Google Forms with Gemini Flash integration.",
+    "image": "/forms-bot.png",
+    "tech": ["python", "selenium", "gemini"],
     "links": [
       {
-        "label": "Website",
-        "href": "https://quizzlab.vercel.app/",
-        "icon": "globe"
+        "label": "Source",
+        "href": "https://github.com/JittoJoseph/AutoFill-Forms",
+        "icon": "github"
       }
     ],
     "featured": false
