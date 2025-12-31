@@ -38,14 +38,20 @@
     "featured": true
   },
   {
-    "title": "FlowLens",
-    "description": "AI-powered DevOps intelligence platform for real-time CI/CD optimization.",
+    "title": "FlowLens: Devops Intelligence",
+    "description": "Hackathon-winning AI-powered DevOps intelligence platform for real-time CI/CD optimization.",
     "tech": ["Flutter", "Node.js", "Python"],
+    "image": "/flowlens.jpg",
     "links": [
       {
         "label": "Source",
         "href": "https://github.com/JittoJoseph/FlowLens-Devops-Intelligence",
         "icon": "github"
+      },
+      {
+        "label": "Linkedin Post",
+        "href": "https://www.linkedin.com/posts/jittojoseph17_dmcon-dmcon2025-devbyzero-activity-7373723692733804545-E1ka",
+        "icon": "linkedin"
       }
     ]  
   },
@@ -53,7 +59,7 @@
     "title": "DevMetric - GitHub Profile Scorer",
     "description": "Analyze GitHub profiles and get comprehensive developer metrics based on repositories, contributions, code quality, and impact.",
     "image": "/devmetric.png",
-    "tech": [],
+    "tech": ["Nextjs", "websockets", "TailwindCSS"],
     "links": [
       {
         "label": "Website",

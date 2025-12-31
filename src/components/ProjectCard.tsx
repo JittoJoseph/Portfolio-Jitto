@@ -1,5 +1,10 @@
 import Image from "next/image";
-import { GitHubIcon, GlobeIcon, LinkIcon } from "@/components/Icons";
+import {
+  GitHubIcon,
+  GlobeIcon,
+  LinkIcon,
+  LinkedInIcon,
+} from "@/components/Icons";
 
 type Link = {
   label: string;
@@ -59,6 +64,8 @@ export default function ProjectCard({ project }: { project: Project }) {
                 <GitHubIcon className="h-3.5 w-3.5" />
               ) : link.icon === "globe" ? (
                 <GlobeIcon className="h-3.5 w-3.5" />
+              ) : link.icon === "linkedin" ? (
+                <LinkedInIcon className="h-3 w-3" />
               ) : (
                 <LinkIcon className="h-3.5 w-3.5" />
               )}
