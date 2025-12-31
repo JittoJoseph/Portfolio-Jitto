@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Jitto Joseph | Software Engineer",
+  title: "Jitto Joseph",
   description:
     "Software Engineer with a passion for building scalable, user-centric applications.",
 };
