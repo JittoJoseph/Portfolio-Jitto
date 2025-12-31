@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import careerData from "@/data/career.json";
 import educationData from "@/data/education.json";
 import projectsData from "@/data/projects.json";
@@ -9,8 +10,12 @@ import {
   LinkedInIcon,
   MailIcon,
   FileTextIcon,
+  ArrowRightIcon,
 } from "@/components/Icons";
 import ExperienceTabs from "@/components/ExperienceTabs";
+import ProjectCard from "@/components/ProjectCard";
+import Footer from "@/components/Footer";
+import SocialLink from "@/components/SocialLink";
 import { calculateAge } from "@/lib/utils";
 
 export default function Home() {
@@ -19,7 +24,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-zinc-950 text-zinc-200 selection:bg-zinc-800 selection:text-zinc-100 font-sans">
-      <div className="mx-auto max-w-2xl px-6 py-24 md:py-32">
+      <div className="mx-auto max-w-2xl px-6 pt-24 pb-8">
         {/* Hero Section */}
         <section className="mb-24 flex flex-col-reverse gap-8 md:flex-row md:items-center md:justify-between">
           <div className="flex-1 space-y-6">
@@ -82,59 +87,29 @@ export default function Home() {
 
         {/* Projects Section */}
         <section className="mb-20">
-          <h2 className="mb-8 text-xl font-semibold text-zinc-100">Projects</h2>
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-xl font-semibold text-zinc-100">
+              Featured Projects
+            </h2>
+            <Link
+              href="/projects"
+              className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors flex items-center gap-1"
+            >
+              View All
+              <ArrowRightIcon className="h-4 w-4" />
+            </Link>
+          </div>
           <div className="grid gap-6 sm:grid-cols-2">
-            {projectsData.map((project, index) => (
-              <a
-                key={index}
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group block rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 transition-all hover:bg-zinc-900 hover:border-zinc-700 hover:shadow-lg hover:shadow-zinc-900/20"
-              >
-                <h3 className="font-medium text-zinc-100 group-hover:text-blue-400 transition-colors">
-                  {project.title}
-                </h3>
-                <p className="mt-2 text-sm text-zinc-400 line-clamp-2 h-10">
-                  {project.description}
-                </p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {project.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-md bg-zinc-800 px-2 py-1 text-[10px] font-medium text-zinc-400 uppercase tracking-wider"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </a>
-            ))}
+            {projectsData
+              .filter((project) => project.featured)
+              .map((project, index) => (
+                <ProjectCard key={index} project={project} />
+              ))}
           </div>
         </section>
+
+        <Footer />
       </div>
     </main>
-  );
-}
-
-function SocialLink({
-  href,
-  icon,
-  label,
-}: {
-  href: string;
-  icon: React.ReactNode;
-  label: string;
-}) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-zinc-400 transition-colors hover:text-zinc-100"
-      aria-label={label}
-    >
-      {icon}
-    </a>
   );
 }
