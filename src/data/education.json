@@ -1,0 +1,24 @@
+[
+  {
+    "institution": "Bishop Vayalil Memorial Holy Cross College",
+    "degree": "Bachelor, Computer Applications",
+    "period": "2026",
+    "image": "/bvm-college.png",
+    "bullets": [
+      "Completed coursework in programming, databases, and web development.",
+      "Gained experience with JavaScript, React, and Node.js."
+    ],
+    "links": [
+      {
+        "label": "Final Year Project",
+        "href": "https://spacialmeet.vercel.app/",
+        "icon": "globe"
+      },
+      {
+        "label": "2nd Year Project",
+        "href": "https://github.com/JittoJoseph/TrailerVerse",
+        "icon": "globe"
+      }
+    ]
+  }
+]

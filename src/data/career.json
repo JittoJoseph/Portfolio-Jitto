@@ -1,0 +1,20 @@
+[
+  {
+    "company": "Bloombloom",
+    "role": "Frontend Developer Intern",
+    "period": "Jan 2025 - Present",
+    "image": "/bloombloom.jpg",
+    "bullets": [
+      "Contributed to the development of the core web platform.",
+      "Built and shipped production features using React & TypeScript.",
+      "Integrated backend APIs and maintained the shared component library."
+    ],
+    "links": [
+      {
+        "label": "Bloombloom",
+        "href": "https://early.bloombloom.co/",
+        "icon": "globe"
+      }
+    ]
+  }
+]

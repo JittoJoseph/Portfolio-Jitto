@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Endurance Protocol",
+    "description": "3D asteroid impact simulator using NASA NeoWs API and Three.js.",
+    "link": "https://endurance-protocol.vercel.app/",
+    "tech": ["Three.js", "NASA API", "Next.js"]
+  },
+  {
+    "title": "FlowLens",
+    "description": "AI-powered DevOps intelligence platform for real-time CI/CD optimization.",
+    "link": "https://github.com/JittoJoseph/FlowLens-Devops-Intelligence",
+    "tech": ["Flutter", "Node.js", "Python"]
+  },
+  {
+    "title": "QuizzLab",
+    "description": "AI quiz generation platform using Gemini AI for instant personalized quizzes.",
+    "link": "https://quizzlab.vercel.app/",
+    "tech": ["React", "Firebase", "Gemini AI"]
+  }
+]
