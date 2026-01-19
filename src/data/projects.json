@@ -1,7 +1,7 @@
 [
-    {
+  {
     "title": "SpacialMeet",
-    "description": "A real-time video conferencing application with spatial audio and interactive features.",
+    "description": "A top-down 2D virtual office experience for real-time presence and communication.",
     "image": "/spacialmeet.png",
     "tech": ["Spring Boot", "WebRTC", "Nextjs"],
     "links": [
@@ -53,7 +53,7 @@
         "href": "https://www.linkedin.com/posts/jittojoseph17_dmcon-dmcon2025-devbyzero-activity-7373723692733804545-E1ka",
         "icon": "linkedin"
       }
-    ]  
+    ]
   },
   {
     "title": "DevMetric - GitHub Profile Scorer",
