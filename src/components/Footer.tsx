@@ -23,7 +23,7 @@ export default function Footer() {
         />
       </div>
       <p className="text-center text-sm text-zinc-500 mt-4">
-        © 2025 Jitto Joseph
+        © {new Date().getFullYear()} Jitto Joseph
       </p>
     </footer>
   );
