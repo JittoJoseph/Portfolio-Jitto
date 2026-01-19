@@ -2,6 +2,33 @@ import Link from "next/link";
 import projectsData from "@/data/projects.json";
 import ProjectCard from "@/components/ProjectCard";
 import { ArrowLeftIcon } from "@/components/Icons";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Projects | Jitto Joseph",
+  description:
+    "Explore my software development projects and contributions, showcasing skills in web development, React, Next.js, and more.",
+  keywords: [
+    "Jitto Joseph",
+    "Projects",
+    "Software Projects",
+    "Web Development Projects",
+    "React Projects",
+    "Portfolio Projects",
+  ],
+  openGraph: {
+    title: "Projects | Jitto Joseph",
+    description: "Explore my software development projects and contributions.",
+    url: "https://www.jittojoseph.xyz/projects",
+    siteName: "Jitto Joseph Portfolio",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Projects | Jitto Joseph",
+    description: "Explore my software development projects and contributions.",
+  },
+};
 
 export default function ProjectsPage() {
   return (
