@@ -110,6 +110,30 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="mb-20 text-center">
+          <Link
+            href={"https://www.linkedin.com/in/jittojoseph17/"}
+            className="inline-flex items-center rounded-full bg-white px-4 py-2 text-sm font-medium text-black mb-6"
+          >
+            Contact
+          </Link>
+          <h2 className="text-3xl font-bold text-zinc-100 mb-4">
+            Get in Touch
+          </h2>
+          <p className="text-lg text-zinc-400">
+            Need help? Or just want to say hi?
+            <br />
+            DM on{" "}
+            <Link
+              href={socialsData.linkedin}
+              target="_blank"
+              className="text-blue-500 hover:text-blue-400 transition-colors"
+            >
+              LinkedIn
+            </Link>
+          </p>
+        </section>
+
         <Footer />
       </div>
     </main>
