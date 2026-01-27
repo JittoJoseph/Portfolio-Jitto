@@ -11,6 +11,7 @@ import {
   MailIcon,
   FileTextIcon,
   ArrowRightIcon,
+  XIcon,
 } from "@/components/Icons";
 import ExperienceTabs from "@/components/ExperienceTabs";
 import ProjectCard from "@/components/ProjectCard";
@@ -61,6 +62,7 @@ export default function Home() {
                   icon={<GitHubIcon />}
                   label="GitHub"
                 />
+                <SocialLink href={socialsData.x} icon={<XIcon />} label="X" />
                 <SocialLink
                   href={`mailto:${socialsData.email}`}
                   icon={<MailIcon />}

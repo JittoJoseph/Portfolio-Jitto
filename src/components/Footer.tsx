@@ -1,5 +1,5 @@
 import socialsData from "@/data/socials.json";
-import { GitHubIcon, LinkedInIcon, MailIcon } from "@/components/Icons";
+import { GitHubIcon, LinkedInIcon, MailIcon, XIcon } from "@/components/Icons";
 import SocialLink from "@/components/SocialLink";
 
 export default function Footer() {
@@ -16,6 +16,7 @@ export default function Footer() {
           icon={<GitHubIcon />}
           label="GitHub"
         />
+        <SocialLink href={socialsData.x} icon={<XIcon />} label="X" />
         <SocialLink
           href={`mailto:${socialsData.email}`}
           icon={<MailIcon />}
