@@ -73,7 +73,7 @@ export default function Home() {
           </div>
           <div className="relative h-32 w-32 overflow-hidden rounded-2xl md:h-40 md:w-40 bg-zinc-800 ring-2 ring-zinc-800 rotate-3 hover:rotate-0 transition-transform duration-300">
             <Image
-              src="/profile-image.JPG"
+              src="/headshot.jpg"
               alt="Jitto Joseph"
               fill
               className="object-cover"
