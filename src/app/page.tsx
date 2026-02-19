@@ -3,6 +3,7 @@ import Link from "next/link";
 import careerData from "@/data/career.json";
 import educationData from "@/data/education.json";
 import projectsData from "@/data/projects.json";
+import freelanceData from "@/data/freelance-projects.json";
 import socialsData from "@/data/socials.json";
 import profileData from "@/data/profile.json";
 import {
@@ -102,8 +103,78 @@ export default function Home() {
             </Link>
           </div>
           <div className="grid gap-6 sm:grid-cols-2">
+            {/* Freelance Projects Card — first */}
+            <Link
+              href="/projects#freelance"
+              className="flex flex-col rounded-xl border border-zinc-700/60 bg-zinc-950 overflow-hidden transition-all hover:border-zinc-500 hover:shadow-lg hover:shadow-black/50 cursor-pointer group"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800/80">
+                <h3 className="text-sm font-semibold text-zinc-100">
+                  Freelance Work
+                </h3>
+                <span className="inline-flex items-center gap-1 text-[9px] text-zinc-500 group-hover:text-zinc-300 transition-colors">
+                  {freelanceData.length} projects{" "}
+                  <ArrowRightIcon className="h-2.5 w-2.5" />
+                </span>
+              </div>
+              {/* Projects list */}
+              <div className="flex flex-col flex-1 p-3 gap-2">
+                {/* First project — featured, larger */}
+                {freelanceData.length > 0 && (
+                  <div className="relative rounded-lg overflow-hidden h-28 flex-shrink-0 border border-zinc-700/50">
+                    <Image
+                      src={freelanceData[0].image}
+                      alt={freelanceData[0].title}
+                      fill
+                      className="object-cover opacity-55 transition-transform duration-500 group-hover:opacity-70"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/5 to-transparent" />
+                    <div className="absolute bottom-2.5 left-3 right-3">
+                      <p className="text-xs font-semibold text-white leading-snug">
+                        {freelanceData[0].title}
+                      </p>
+                      <p className="text-[9px] text-zinc-500 mt-0.5">
+                        {freelanceData[0].tech.slice(0, 3).join(" · ")}
+                      </p>
+                    </div>
+                  </div>
+                )}
+                {/* Second+ projects — smaller, same aesthetic */}
+                {freelanceData.slice(1, 3).map((project, i) => (
+                  <div
+                    key={i}
+                    className="relative rounded-lg overflow-hidden h-14 flex-shrink-0 border border-zinc-800/70"
+                  >
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover opacity-40 transition-opacity duration-300 group-hover:opacity-55"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/5 to-transparent" />
+                    <div className="absolute bottom-2 left-3 right-3">
+                      <p className="text-[10px] font-semibold text-white leading-snug truncate">
+                        {project.title}
+                      </p>
+                      <p className="text-[8px] text-zinc-600">
+                        {project.tech.slice(0, 2).join(" · ")}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+                {/* Footer */}
+                <div className="mt-auto pt-2 border-t border-zinc-800/60">
+                  <span className="text-[10px] text-zinc-500 group-hover:text-zinc-300 transition-colors flex items-center gap-1">
+                    View all freelance work
+                    <ArrowRightIcon className="h-3 w-3" />
+                  </span>
+                </div>
+              </div>
+            </Link>
             {projectsData
               .filter((project) => project.featured)
+              .slice(0, 3)
               .map((project, index) => (
                 <ProjectCard key={index} project={project} />
               ))}

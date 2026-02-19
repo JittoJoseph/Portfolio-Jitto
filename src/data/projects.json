@@ -70,25 +70,6 @@
     "featured": true
   },
   {
-    "title": "COREX - The Tech Fest",
-    "description": "Modern web platform for showcasing tech fest events at BVM Holy Cross College.",
-    "image": "/corex.png",
-    "tech": ["Next.js 15", "Tailwind CSS", "TypeScript"],
-    "links": [
-      {
-        "label": "Website",
-        "href": "https://bvmtechfest.com/",
-        "icon": "globe"
-      },
-      {
-        "label": "Source",
-        "href": "https://github.com/JittoJoseph/Corex-Events",
-        "icon": "github"
-      }
-    ],
-    "featured": true
-  },
-  {
     "title": "Google Forms MCQ Auto-Answer",
     "description": "AI tool for auto-filling MCQ questions in Google Forms with Gemini Flash integration.",
     "image": "/forms-bot.png",

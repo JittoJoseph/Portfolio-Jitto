@@ -13,6 +13,9 @@
 }
 
 /* Dark mode by default */
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   background: var(--background);
