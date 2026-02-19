@@ -9,14 +9,8 @@ export default function FreelanceCard() {
       href="/projects#freelance"
       className="group sm:col-span-2 rounded-2xl border border-zinc-800 bg-zinc-950 p-4 hover:border-zinc-700 transition-all duration-200 block"
     >
-      {/* Terminal-style header */}
       <div className="flex items-center justify-between mb-4 pb-3 border-b border-zinc-800/80">
         <div className="flex items-center gap-3">
-          <div className="flex gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
-            <span className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
-            <span className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
-          </div>
           <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">
             FREELANCE WORK
           </span>
@@ -26,7 +20,6 @@ export default function FreelanceCard() {
         </span>
       </div>
 
-      {/* Project tiles — 1 col on mobile, 2 cols on sm+ */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {freelanceData.slice(0, 2).map((project, i) => (
           <div
