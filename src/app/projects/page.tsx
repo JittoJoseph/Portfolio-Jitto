@@ -34,28 +34,30 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <main className="min-h-screen bg-zinc-950 text-zinc-200 selection:bg-zinc-800 selection:text-zinc-100 font-sans">
-      <div className="mx-auto max-w-3xl px-6 pt-24 pb-16">
+      <div className="mx-auto max-w-3xl px-6 pt-14 pb-16">
         {/* Page heading */}
-        <div className="mb-10 border-b border-zinc-800/60 pb-8">
-          <div className="flex items-start justify-between mb-6">
-            <div>
-              <p className="text-[10px] font-mono uppercase tracking-widest text-zinc-600 mb-2">
-                Portfolio
-              </p>
-              <h1 className="text-2xl font-bold tracking-tight text-white">
-                Projects &amp; Contributions
-              </h1>
-            </div>
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-500 hover:text-zinc-200 transition-colors mt-1"
-            >
-              <ArrowLeftIcon className="h-3.5 w-3.5" />
-              Back to Home
-            </Link>
+        <div className="mb-10">
+          {/* Back link */}
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-600 hover:text-zinc-300 transition-colors mb-8"
+          >
+            <ArrowLeftIcon className="h-3.5 w-3.5" />
+            Back to Home
+          </Link>
+
+          {/* Title */}
+          <div className="mb-6">
+            <p className="text-[10px] font-mono uppercase tracking-widest text-zinc-600 mb-2">
+              Portfolio
+            </p>
+            <h1 className="text-2xl font-bold tracking-tight text-white">
+              Projects &amp; Contributions
+            </h1>
           </div>
+
           {/* Section nav */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 border-t border-zinc-800/60 pt-6">
             <a
               href="#personal"
               className="inline-flex items-center gap-1.5 rounded-full bg-zinc-800/80 border border-zinc-700/60 px-4 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-700/80 hover:text-white transition-all"
