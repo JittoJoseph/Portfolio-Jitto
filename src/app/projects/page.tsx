@@ -1,7 +1,7 @@
 import Link from "next/link";
 import projectsData from "@/data/projects.json";
 import freelanceData from "@/data/freelance-projects.json";
-import { ArrowLeftIcon, GitHubIcon } from "@/components/Icons";
+import { ArrowLeftIcon, GitHubIcon, LinkedInIcon } from "@/components/Icons";
 import ProjectCard from "@/components/ProjectCard";
 import type { Metadata } from "next";
 
@@ -121,13 +121,13 @@ export default function ProjectsPage() {
               Get in touch
             </a>
             <a
-              href="https://github.com/JittoJoseph"
+              href="https://www.linkedin.com/in/jittojoseph17/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-zinc-700 px-5 py-2 text-sm font-medium text-zinc-400 hover:border-zinc-500 hover:text-zinc-200 transition-colors"
             >
-              <GitHubIcon className="h-4 w-4" />
-              GitHub
+              <LinkedInIcon className="h-4 w-4" />
+              LinkedIn
             </a>
           </div>
         </div>
