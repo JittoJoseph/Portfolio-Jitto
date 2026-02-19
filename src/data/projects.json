@@ -70,6 +70,20 @@
     "featured": true
   },
   {
+    "title": "PenguinX - Market Simulation Engine",
+    "description": "Simulates betting strategies on weather prediction markets via Polymarket.",
+    "image": "/prediction-market.png",
+    "tech": ["Next.js", "Node.js", "Polymarket API"],
+    "links": [
+      {
+        "label": "Website",
+        "href": "https://market-watcher-700.vercel.app/",
+        "icon": "globe"
+      }
+    ],
+    "featured": true
+  },
+  {
     "title": "Google Forms MCQ Auto-Answer",
     "description": "AI tool for auto-filling MCQ questions in Google Forms with Gemini Flash integration.",
     "image": "/forms-bot.png",

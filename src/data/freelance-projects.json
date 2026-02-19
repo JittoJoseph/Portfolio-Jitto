@@ -16,7 +16,7 @@
     "title": "COREX - The Tech Fest",
     "description": "Modern web platform for showcasing tech fest events at BVM Holy Cross College.",
     "image": "/corex-techfest.png",
-    "tech": ["Next.js 15", "Tailwind CSS", "TypeScript"],
+    "tech": ["Next.js", "Tailwind CSS", "TypeScript"],
     "links": [
       {
         "label": "Website",
