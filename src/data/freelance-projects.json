@@ -1,7 +1,7 @@
 [
   {
     "title": "Goleez - Complete Home Care Companion",
-    "description": "Life gets busy. We handle the rest. Complete home care, delivery, and personal assistance platform for busy professionals, elderly parents, and families.",
+    "description": "Home care, delivery, and personal assistance platform for busy professionals and families.",
     "image": "/goleez.png",
     "tech": ["Next.js", "Tailwind CSS", "TypeScript"],
     "links": [
@@ -14,7 +14,7 @@
   },
   {
     "title": "COREX - The Tech Fest",
-    "description": "Modern web platform for showcasing tech fest events at BVM Holy Cross College.",
+    "description": "Web platform for tech fest events at BVM Holy Cross College.",
     "image": "/corex-techfest.png",
     "tech": ["Next.js", "Tailwind CSS", "TypeScript"],
     "links": [

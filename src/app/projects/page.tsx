@@ -1,14 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
 import projectsData from "@/data/projects.json";
 import freelanceData from "@/data/freelance-projects.json";
-import {
-  ArrowLeftIcon,
-  GitHubIcon,
-  GlobeIcon,
-  LinkIcon,
-  LinkedInIcon,
-} from "@/components/Icons";
+import { ArrowLeftIcon, GitHubIcon } from "@/components/Icons";
+import ProjectCard from "@/components/ProjectCard";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -85,69 +79,9 @@ export default function ProjectsPage() {
           <p className="text-xs text-zinc-600 mb-6">
             Side projects and open source contributions
           </p>
-          <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {projectsData.map((project, index) => (
-              <div
-                key={index}
-                className="group flex flex-col sm:flex-row gap-4 rounded-2xl border border-zinc-800/80 bg-zinc-900/50 p-3 hover:border-zinc-700 hover:bg-zinc-900/70 transition-all duration-200"
-              >
-                {/* Image */}
-                {project.image && (
-                  <div className="relative w-full h-44 sm:w-48 sm:h-36 sm:flex-shrink-0 rounded-xl overflow-hidden self-start">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-500"
-                    />
-                  </div>
-                )}
-                {/* Content */}
-                <div className="flex-1 flex flex-col justify-between min-w-0 px-2 py-1.5">
-                  <div>
-                    <h3 className="text-[15px] font-semibold text-white leading-snug mb-1.5 tracking-tight">
-                      {project.title}
-                    </h3>
-                    <p className="text-[13px] text-zinc-400 leading-relaxed mb-4">
-                      {project.description}
-                    </p>
-                  </div>
-                  <div className="flex flex-col gap-2.5">
-                    <div className="flex flex-wrap gap-1.5">
-                      {project.tech.map((t) => (
-                        <span
-                          key={t}
-                          className="font-mono text-[9px] uppercase tracking-wider text-zinc-400 bg-zinc-800/60 border border-zinc-700/50 px-2 py-0.5 rounded-full"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex items-center gap-3">
-                      {project.links.map((link, i) => (
-                        <a
-                          key={i}
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-[11px] font-medium text-zinc-400 hover:text-white transition-colors"
-                        >
-                          {link.icon === "github" ? (
-                            <GitHubIcon className="h-3.5 w-3.5" />
-                          ) : link.icon === "globe" ? (
-                            <GlobeIcon className="h-3.5 w-3.5" />
-                          ) : link.icon === "linkedin" ? (
-                            <LinkedInIcon className="h-3.5 w-3.5" />
-                          ) : (
-                            <LinkIcon className="h-3.5 w-3.5" />
-                          )}
-                          {link.label}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <ProjectCard key={index} project={project} />
             ))}
           </div>
         </section>
@@ -160,74 +94,9 @@ export default function ProjectsPage() {
           <p className="text-xs text-zinc-600 mb-6">
             Projects built for clients and businesses
           </p>
-          <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {freelanceData.map((project, index) => (
-              <div
-                key={index}
-                className="group flex flex-col sm:flex-row gap-4 rounded-2xl border border-zinc-800/80 bg-zinc-900/50 p-3 hover:border-zinc-700 hover:bg-zinc-900/70 transition-all duration-200"
-              >
-                {/* Image */}
-                {project.image && (
-                  <div className="relative w-full h-44 sm:w-48 sm:h-36 sm:flex-shrink-0 rounded-xl overflow-hidden self-start">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-500"
-                    />
-                  </div>
-                )}
-                {/* Content */}
-                <div className="flex-1 flex flex-col justify-between min-w-0 px-2 py-1.5">
-                  <div>
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <h3 className="text-[15px] font-semibold text-white leading-snug tracking-tight">
-                        {project.title}
-                      </h3>
-                      <span className="font-mono text-[8px] uppercase tracking-widest text-zinc-500 bg-zinc-800/60 border border-zinc-700/50 px-1.5 py-0.5 rounded-full flex-shrink-0">
-                        Client
-                      </span>
-                    </div>
-                    <p className="text-[13px] text-zinc-400 leading-relaxed mb-4">
-                      {project.description}
-                    </p>
-                  </div>
-                  <div className="flex flex-col gap-2.5">
-                    <div className="flex flex-wrap gap-1.5">
-                      {project.tech.map((t) => (
-                        <span
-                          key={t}
-                          className="font-mono text-[9px] uppercase tracking-wider text-zinc-400 bg-zinc-800/60 border border-zinc-700/50 px-2 py-0.5 rounded-full"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex items-center gap-3">
-                      {project.links.map((link, i) => (
-                        <a
-                          key={i}
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-[11px] font-medium text-zinc-400 hover:text-white transition-colors"
-                        >
-                          {link.icon === "github" ? (
-                            <GitHubIcon className="h-3.5 w-3.5" />
-                          ) : link.icon === "globe" ? (
-                            <GlobeIcon className="h-3.5 w-3.5" />
-                          ) : link.icon === "linkedin" ? (
-                            <LinkedInIcon className="h-3.5 w-3.5" />
-                          ) : (
-                            <LinkIcon className="h-3.5 w-3.5" />
-                          )}
-                          {link.label}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <ProjectCard key={index} project={project} badge="Client" />
             ))}
           </div>
         </section>

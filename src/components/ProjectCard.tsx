@@ -21,7 +21,13 @@ type Project = {
   image?: string;
 };
 
-export default function ProjectCard({ project }: { project: Project }) {
+export default function ProjectCard({
+  project,
+  badge,
+}: {
+  project: Project;
+  badge?: string;
+}) {
   return (
     <div className="group rounded-2xl border border-zinc-800/80 bg-zinc-900/50 p-3 hover:border-zinc-700 hover:bg-zinc-900/70 transition-all duration-200">
       {project.image && (
@@ -33,6 +39,11 @@ export default function ProjectCard({ project }: { project: Project }) {
             className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-500"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+          {badge && (
+            <span className="absolute top-2 right-2 font-mono text-[8px] uppercase tracking-widest text-zinc-400 bg-zinc-900/80 border border-zinc-700/60 px-1.5 py-0.5 rounded-full">
+              {badge}
+            </span>
+          )}
         </div>
       )}
       <div className="px-1">
