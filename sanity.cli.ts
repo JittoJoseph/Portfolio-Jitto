@@ -9,7 +9,7 @@ const studioHost = process.env.SANITY_STUDIO_HOST;
 
 if (!projectId || !dataset) {
   throw new Error(
-    "Missing SANITY_STUDIO_PROJECT_ID/NEXT_PUBLIC_SANITY_PROJECT_ID or SANITY_STUDIO_DATASET/NEXT_PUBLIC_SANITY_DATASET."
+    "Missing SANITY_STUDIO_PROJECT_ID/NEXT_PUBLIC_SANITY_PROJECT_ID or SANITY_STUDIO_DATASET/NEXT_PUBLIC_SANITY_DATASET.",
   );
 }
 
@@ -19,4 +19,7 @@ export default defineCliConfig({
     dataset,
   },
   ...(studioHost ? { studioHost } : {}),
+  deployment: {
+    appId: "xyxksp5meswupf15sjx4x6d9",
+  },
 });
