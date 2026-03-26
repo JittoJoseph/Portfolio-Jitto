@@ -13,10 +13,8 @@ A personal portfolio website built with Next.js.
 
 - `src/app/` - Pages and layouts
 - `src/components/` - Reusable components
-- `src/data/` - JSON fallback content (local backup)
-- `src/lib/sanity/` - Sanity client, queries, types, fallback mapping
+- `src/lib/sanity/` - Sanity client, queries, and types
 - `sanity/` - Sanity schema and Studio structure
-- `scripts/seed-sanity.mjs` - One-time migration script from JSON to Sanity
 - `public/` - Static assets
 
 ## Sanity CMS Setup
@@ -30,14 +28,11 @@ A personal portfolio website built with Next.js.
    - `SANITY_STUDIO_PROJECT_ID`
    - `SANITY_STUDIO_DATASET`
    - `SANITY_STUDIO_HOST` (optional but recommended for stable hosted Studio URL)
-   - `SANITY_API_WRITE_TOKEN` (needed for seed script)
-4. Seed existing JSON data into Sanity:
-   - `npm run sanity:seed`
-5. Deploy Studio (Sanity hosted):
+4. Deploy Studio (Sanity hosted):
    - `npm run sanity:deploy`
    - choose a `*.sanity.studio` hostname when prompted (or set `SANITY_STUDIO_HOST`)
-6. Open your Sanity-hosted dashboard at `https://<your-host>.sanity.studio`
-7. Use that dashboard to edit data, upload resume PDF, and change logos/images.
+5. Open your Sanity-hosted dashboard at `https://<your-host>.sanity.studio`
+6. Use that dashboard to edit data, upload resume PDF, and change logos/images.
 
 ## Build-Time Generation + Redeploy Flow
 
@@ -57,6 +52,5 @@ This project keeps build-time generation. Content updates are done in Sanity, an
 
 - **Sanity project ID**
 - **Sanity dataset name**
-- **Sanity API write token** (for migration script)
 - **Optional Sanity read token** (if dataset is private)
 - **Vercel Deploy Hook URL** (treat as secret)

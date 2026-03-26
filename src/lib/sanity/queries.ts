@@ -1,4 +1,3 @@
-import { fallbackPortfolioData } from "./fallback";
 import { getSanityClient } from "./client";
 import type {
   ExperienceData,
@@ -94,16 +93,16 @@ const experienceQuery = `*[_type == "experience"]|order(orderRank asc){
 }`;
 
 function normalizeProfile(raw?: RawProfile | null): ProfileData | null {
-  if (!raw || !raw.birthDate || !raw.tagline || !raw.bio) {
+  if (!raw || !raw.fullName || !raw.birthDate || !raw.tagline || !raw.bio || !raw.headshotUrl) {
     return null;
   }
 
   return {
-    fullName: raw.fullName || fallbackPortfolioData.profile.fullName,
+    fullName: raw.fullName,
     birthDate: raw.birthDate,
     tagline: raw.tagline,
     bio: raw.bio,
-    headshotUrl: raw.headshotUrl || fallbackPortfolioData.profile.headshotUrl,
+    headshotUrl: raw.headshotUrl,
   };
 }
 
@@ -159,7 +158,9 @@ export async function getPortfolioData(): Promise<PortfolioData> {
   const client = getSanityClient();
 
   if (!client) {
-    return fallbackPortfolioData;
+    throw new Error(
+      "Sanity client is not configured. Set NEXT_PUBLIC_SANITY_PROJECT_ID and NEXT_PUBLIC_SANITY_DATASET."
+    );
   }
 
   const [rawProfile, rawSocials, rawProjects, rawExperience] = await Promise.all([
@@ -175,14 +176,22 @@ export async function getPortfolioData(): Promise<PortfolioData> {
   const experience = normalizeExperience(rawExperience);
 
   if (!profile || !socials || projects.length === 0 || experience.length === 0) {
-    return fallbackPortfolioData;
+    throw new Error(
+      `Sanity content missing required docs: profile=${Boolean(
+        profile
+      )} socials=${Boolean(socials)} projects=${projects.length} experience=${
+        experience.length
+      }`
+    );
   }
 
   const career = experience.filter((item) => item.kind === "career");
   const education = experience.filter((item) => item.kind === "education");
 
   if (career.length === 0 || education.length === 0) {
-    return fallbackPortfolioData;
+    throw new Error(
+      `Sanity experience missing required kinds: career=${career.length} education=${education.length}`
+    );
   }
 
   return {
@@ -192,4 +201,27 @@ export async function getPortfolioData(): Promise<PortfolioData> {
     career,
     education,
   };
+}
+
+export async function hasPortfolioContent(): Promise<boolean> {
+  const client = getSanityClient();
+
+  if (!client) {
+    return false;
+  }
+
+  const [profileCount, socialsCount, projectsCount, experienceCount] =
+    await Promise.all([
+      client.fetch<number>('count(*[_type == "profile" && _id == "profile-main"])'),
+      client.fetch<number>('count(*[_type == "socials" && _id == "socials-main"])'),
+      client.fetch<number>('count(*[_type == "project"])'),
+      client.fetch<number>('count(*[_type == "experience"])'),
+    ]);
+
+  return (
+    profileCount > 0 &&
+    socialsCount > 0 &&
+    projectsCount > 0 &&
+    experienceCount > 0
+  );
 }

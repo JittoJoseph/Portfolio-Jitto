@@ -3,6 +3,7 @@ import { ArrowLeftIcon, LinkedInIcon } from "@/components/Icons";
 import ProjectCard from "@/components/ProjectCard";
 import type { Metadata } from "next";
 import { getPortfolioData } from "@/lib/sanity/queries";
+import { unstable_noStore as noStore } from "next/cache";
 
 export const dynamic = "force-static";
 
@@ -33,6 +34,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ProjectsPage() {
+  noStore();
   const data = await getPortfolioData();
   const projectsData = data.projects.filter((project) => project.kind === "personal");
   const freelanceData = data.projects.filter((project) => project.kind === "freelance");

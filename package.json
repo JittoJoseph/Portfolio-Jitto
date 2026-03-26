@@ -9,8 +9,7 @@
     "lint": "eslint",
     "sanity:dev": "sanity dev",
     "sanity:build": "sanity build",
-    "sanity:deploy": "sanity deploy",
-    "sanity:seed": "node scripts/seed-sanity.mjs"
+    "sanity:deploy": "sanity deploy"
   },
   "dependencies": {
     "@sanity/cli": "^6.2.1",

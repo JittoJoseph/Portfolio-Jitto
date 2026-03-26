@@ -20,3 +20,7 @@ export function getSanityClient() {
 
   return client;
 }
+
+export function clearSanityClientCache() {
+  client = null;
+}

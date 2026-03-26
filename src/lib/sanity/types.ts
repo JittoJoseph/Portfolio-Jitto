@@ -9,7 +9,7 @@ export type ProfileData = {
   birthDate: string;
   tagline: string;
   bio: string;
-  headshotUrl?: string;
+  headshotUrl: string;
 };
 
 export type SocialsData = {

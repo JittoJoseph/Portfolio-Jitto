@@ -15,18 +15,20 @@ import Footer from "@/components/Footer";
 import SocialLink from "@/components/SocialLink";
 import { calculateAge } from "@/lib/utils";
 import { getPortfolioData } from "@/lib/sanity/queries";
+import { unstable_noStore as noStore } from "next/cache";
 
 export const dynamic = "force-static";
 
 export default async function Home() {
+  noStore();
   const data = await getPortfolioData();
   const age = calculateAge(data.profile.birthDate);
   const tagline = data.profile.tagline.replace("{age}", age.toString());
   const personalProjects = data.projects.filter(
-    (project) => project.kind === "personal"
+    (project) => project.kind === "personal",
   );
   const freelanceProjects = data.projects.filter(
-    (project) => project.kind === "freelance"
+    (project) => project.kind === "freelance",
   );
 
   return (
@@ -79,7 +81,7 @@ export default async function Home() {
           </div>
           <div className="relative h-32 w-32 overflow-hidden rounded-2xl md:h-40 md:w-40 bg-zinc-800 ring-2 ring-zinc-800 rotate-3 hover:rotate-0 transition-transform duration-300">
             <Image
-              src={data.profile.headshotUrl || "/headshot.jpg"}
+              src={data.profile.headshotUrl}
               alt={data.profile.fullName}
               fill
               className="object-cover"
