@@ -1,9 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import freelanceData from "@/data/freelance-projects.json";
 import { ArrowRightIcon } from "@/components/Icons";
+import type { ProjectData } from "@/lib/sanity/types";
 
-export default function FreelanceCard() {
+export default function FreelanceCard({
+  projects,
+}: {
+  projects: ProjectData[];
+}) {
   return (
     <Link
       href="/projects#freelance"
@@ -21,18 +25,22 @@ export default function FreelanceCard() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {freelanceData.slice(0, 2).map((project, i) => (
+        {projects.slice(0, 2).map((project, i) => (
           <div
             key={i}
             className="rounded-xl border border-zinc-800/70 overflow-hidden bg-zinc-900/40"
           >
             <div className="relative w-full h-28 overflow-hidden">
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                className="object-cover opacity-80 group-hover:opacity-90 transition-opacity duration-300 group-hover:scale-[1.02] transition-transform"
-              />
+              {project.image ? (
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover opacity-80 group-hover:opacity-90 transition-opacity duration-300 group-hover:scale-[1.02] transition-transform"
+                />
+              ) : (
+                <div className="h-full w-full bg-zinc-900" />
+              )}
             </div>
             <div className="px-3 pt-2 pb-3">
               <p className="text-[12px] font-semibold text-zinc-100 leading-snug truncate">
@@ -49,9 +57,9 @@ export default function FreelanceCard() {
       {/* Footer */}
       <div className="mt-3 pt-3 border-t border-zinc-800/60 flex items-center justify-between">
         <span className="font-mono text-[9px] text-zinc-700">
-          {freelanceData.length > 2
-            ? `+${freelanceData.length - 2} more project${freelanceData.length - 2 > 1 ? "s" : ""}`
-            : `${freelanceData.length} client projects`}
+          {projects.length > 2
+            ? `+${projects.length - 2} more project${projects.length - 2 > 1 ? "s" : ""}`
+            : `${projects.length} client projects`}
         </span>
         <span className="font-mono text-[9px] text-zinc-700">
           status: delivered

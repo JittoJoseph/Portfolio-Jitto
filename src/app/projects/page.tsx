@@ -1,9 +1,10 @@
 import Link from "next/link";
-import projectsData from "@/data/projects.json";
-import freelanceData from "@/data/freelance-projects.json";
-import { ArrowLeftIcon, GitHubIcon, LinkedInIcon } from "@/components/Icons";
+import { ArrowLeftIcon, LinkedInIcon } from "@/components/Icons";
 import ProjectCard from "@/components/ProjectCard";
 import type { Metadata } from "next";
+import { getPortfolioData } from "@/lib/sanity/queries";
+
+export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "Projects | Jitto Joseph",
@@ -31,7 +32,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  const data = await getPortfolioData();
+  const projectsData = data.projects.filter((project) => project.kind === "personal");
+  const freelanceData = data.projects.filter((project) => project.kind === "freelance");
+
   return (
     <main className="min-h-screen bg-zinc-950 text-zinc-200 selection:bg-zinc-800 selection:text-zinc-100 font-sans">
       <div className="mx-auto max-w-3xl px-6 pt-14 pb-16">

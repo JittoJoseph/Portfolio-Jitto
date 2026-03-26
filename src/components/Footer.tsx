@@ -1,24 +1,24 @@
-import socialsData from "@/data/socials.json";
 import { GitHubIcon, LinkedInIcon, MailIcon, XIcon } from "@/components/Icons";
 import SocialLink from "@/components/SocialLink";
+import type { SocialsData } from "@/lib/sanity/types";
 
-export default function Footer() {
+export default function Footer({ socials }: { socials: SocialsData }) {
   return (
     <footer className="mt-24 pt-8 border-t border-zinc-800">
       <div className="flex justify-center gap-6">
         <SocialLink
-          href={socialsData.linkedin}
+          href={socials.linkedin}
           icon={<LinkedInIcon />}
           label="LinkedIn"
         />
         <SocialLink
-          href={socialsData.github}
+          href={socials.github}
           icon={<GitHubIcon />}
           label="GitHub"
         />
-        <SocialLink href={socialsData.x} icon={<XIcon />} label="X" />
+        <SocialLink href={socials.x} icon={<XIcon />} label="X" />
         <SocialLink
-          href={`mailto:${socialsData.email}`}
+          href={`mailto:${socials.email}`}
           icon={<MailIcon />}
           label="Email"
         />

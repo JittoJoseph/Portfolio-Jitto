@@ -5,27 +5,13 @@ import {
   LinkIcon,
   LinkedInIcon,
 } from "@/components/Icons";
-
-type Link = {
-  label: string;
-  href: string;
-  icon?: string;
-};
-
-type Project = {
-  title: string;
-  description: string;
-  tech: string[];
-  links: Link[];
-  featured?: boolean;
-  image?: string;
-};
+import type { ProjectData } from "@/lib/sanity/types";
 
 export default function ProjectCard({
   project,
   badge,
 }: {
-  project: Project;
+  project: ProjectData;
   badge?: string;
 }) {
   return (

@@ -3,30 +3,14 @@
 import { useState } from "react";
 import Image from "next/image";
 import { GlobeIcon, LinkIcon, LinkedInIcon } from "./Icons";
-
-type Link = {
-  label: string;
-  href: string;
-  icon?: string;
-};
-
-type ExperienceItem = {
-  company?: string;
-  institution?: string;
-  role?: string;
-  degree?: string;
-  period: string;
-  image?: string;
-  bullets: string[];
-  links: Link[];
-};
+import type { ExperienceData } from "@/lib/sanity/types";
 
 export default function ExperienceTabs({
   career,
   education,
 }: {
-  career: ExperienceItem[];
-  education: ExperienceItem[];
+  career: ExperienceData[];
+  education: ExperienceData[];
 }) {
   const [activeTab, setActiveTab] = useState<"work" | "education">("work");
 
