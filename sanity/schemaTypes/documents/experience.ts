@@ -66,7 +66,6 @@ export const experienceType = defineType({
       title: "Links",
       type: "array",
       of: [defineArrayMember({ type: "link" })],
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "orderRank",
