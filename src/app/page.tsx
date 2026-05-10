@@ -12,15 +12,14 @@ import ExperienceTabs from "@/components/ExperienceTabs";
 import ProjectCard from "@/components/ProjectCard";
 import FreelanceCard from "@/components/FreelanceCard";
 import Footer from "@/components/Footer";
+import GitHubActivity from "@/components/GitHubActivity";
 import SocialLink from "@/components/SocialLink";
 import { calculateAge } from "@/lib/utils";
 import { getPortfolioData } from "@/lib/sanity/queries";
-import { unstable_noStore as noStore } from "next/cache";
 
-export const dynamic = "force-static";
+export const revalidate = 3600;
 
 export default async function Home() {
-  noStore();
   const data = await getPortfolioData();
   const age = calculateAge(data.profile.birthDate);
   const tagline = data.profile.tagline.replace("{age}", age.toString());
@@ -91,8 +90,15 @@ export default async function Home() {
         </section>
 
         {/* Experience & Education Tabs */}
-        <section className="mb-24">
+        <section className="mb-16">
           <ExperienceTabs career={data.career} education={data.education} />
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-xl font-semibold text-zinc-100 mb-4">
+            Code Activity
+          </h2>
+          <GitHubActivity githubProfileUrl={data.socials.github} />
         </section>
 
         {/* Projects Section */}
