@@ -38,6 +38,14 @@ export const profileType = defineType({
       type: "image",
       options: { hotspot: true },
     }),
+    defineField({
+      name: "showCodeActivity",
+      title: "Show code activity section",
+      type: "boolean",
+      description:
+        "Enable or disable the GitHub code activity section on the landing page.",
+      initialValue: true,
+    }),
   ],
   preview: {
     select: {

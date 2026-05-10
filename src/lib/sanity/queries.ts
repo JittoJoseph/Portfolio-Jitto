@@ -14,6 +14,7 @@ type RawProfile = {
   tagline?: string;
   bio?: string;
   headshotUrl?: string;
+  showCodeActivity?: boolean;
 };
 
 type RawSocials = {
@@ -55,7 +56,8 @@ const profileQuery = `*[_type == "profile" && _id == "profile-main"][0]{
   birthDate,
   tagline,
   bio,
-  "headshotUrl": headshot.asset->url
+  "headshotUrl": headshot.asset->url,
+  showCodeActivity
 }`;
 
 const socialsQuery = `*[_type == "socials" && _id == "socials-main"][0]{
@@ -103,6 +105,7 @@ function normalizeProfile(raw?: RawProfile | null): ProfileData | null {
     tagline: raw.tagline,
     bio: raw.bio,
     headshotUrl: raw.headshotUrl,
+    showCodeActivity: raw.showCodeActivity ?? true,
   };
 }
 

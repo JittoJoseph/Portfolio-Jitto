@@ -94,12 +94,14 @@ export default async function Home() {
           <ExperienceTabs career={data.career} education={data.education} />
         </section>
 
-        <section className="mb-16">
-          <h2 className="text-xl font-semibold text-zinc-100 mb-4">
-            Code Activity
-          </h2>
-          <GitHubActivity githubProfileUrl={data.socials.github} />
-        </section>
+        {data.profile.showCodeActivity && (
+          <section className="mb-16">
+            <h2 className="text-xl font-semibold text-zinc-100 mb-4">
+              Code Activity
+            </h2>
+            <GitHubActivity githubProfileUrl={data.socials.github} />
+          </section>
+        )}
 
         {/* Projects Section */}
         <section className="mb-20">
