@@ -49,6 +49,12 @@ export const experienceType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "location",
+      title: "Location",
+      description: "Optional free-form location, for example Remote, California, United States, or Bengaluru - Hybrid.",
+      type: "string",
+    }),
+    defineField({
       name: "image",
       title: "Logo / image",
       type: "image",
@@ -59,7 +65,6 @@ export const experienceType = defineType({
       title: "Bullets",
       type: "array",
       of: [defineArrayMember({ type: "string" })],
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "links",
@@ -87,12 +92,16 @@ export const experienceType = defineType({
       company: "company",
       institution: "institution",
       kind: "kind",
+      period: "period",
+      location: "location",
       media: "image",
     },
     prepare(selection) {
       return {
         title: selection.company || selection.institution || "Experience item",
-        subtitle: selection.kind,
+        subtitle: [selection.kind, selection.period, selection.location]
+          .filter(Boolean)
+          .join(" | "),
         media: selection.media,
       };
     },

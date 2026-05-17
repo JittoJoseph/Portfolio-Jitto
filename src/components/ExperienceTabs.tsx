@@ -49,28 +49,37 @@ export default function ExperienceTabs({
                 </div>
               )}
               <div className="flex-1 min-w-0">
-                <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-                  <h3 className="text-[15px] font-semibold text-zinc-100 leading-snug">
-                    {item.company || item.institution}
-                  </h3>
-                  <span className="font-mono text-[11px] text-zinc-500 flex-shrink-0">
-                    {item.period}
-                  </span>
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-x-4">
+                  <div className="min-w-0">
+                    <h3 className="text-[15px] font-semibold text-zinc-100 leading-snug">
+                      {item.company || item.institution}
+                    </h3>
+                    <p className="mt-1 text-sm leading-snug text-zinc-400">
+                      {item.role || item.degree}
+                    </p>
+                  </div>
+                  <div className="shrink-0 text-left sm:text-right">
+                    <p className="font-mono text-[11px] leading-4 text-zinc-500">
+                      {item.period}
+                    </p>
+                    {item.location && (
+                      <p className="mt-0.5 max-w-[14rem] text-xs font-medium leading-4 text-zinc-500 sm:ml-auto">
+                        {item.location}
+                      </p>
+                    )}
+                  </div>
                 </div>
-                <p className="text-sm text-zinc-400 mt-1">
-                  {item.role || item.degree}
-                </p>
               </div>
             </div>
 
             {item.bullets.length > 0 && (
-              <ul className="space-y-2.5 border-t border-zinc-800/60 pt-4 mb-4">
+              <ul className="space-y-1.5 border-t border-zinc-800/60 pt-4 mb-4">
                 {item.bullets.map((bullet, i) => (
                   <li
                     key={i}
-                    className="flex gap-2.5 text-sm text-zinc-400 leading-relaxed"
+                    className="flex gap-2.5 text-sm text-zinc-400 leading-[1.45]"
                   >
-                    <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-zinc-700" />
+                    <span className="mt-[0.5rem] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-zinc-700" />
                     {bullet}
                   </li>
                 ))}

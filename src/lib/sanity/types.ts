@@ -41,6 +41,7 @@ export type ExperienceData = {
   role?: string;
   degree?: string;
   period: string;
+  location?: string;
   image?: string | null;
   bullets: string[];
   links: LinkItem[];

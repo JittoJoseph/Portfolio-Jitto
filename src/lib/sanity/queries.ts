@@ -49,6 +49,7 @@ type RawExperience = {
   role?: string;
   degree?: string;
   period?: string;
+  location?: string;
   image?: string;
   bullets?: string[];
   links?: LinkItem[];
@@ -92,6 +93,7 @@ const experienceQuery = `*[_type == "experience"]|order(orderRank asc){
   role,
   degree,
   period,
+  location,
   "image": image.asset->url,
   bullets,
   links,
@@ -154,6 +156,7 @@ function normalizeExperience(raw: RawExperience[] = []): ExperienceData[] {
       role: item.role,
       degree: item.degree,
       period: item.period as string,
+      location: item.location,
       image: item.image,
       bullets: item.bullets ?? [],
       links: item.links ?? [],
