@@ -35,81 +35,85 @@ export default function ExperienceTabs({
       </div>
 
       <div className="divide-y divide-zinc-800/60 animate-in fade-in slide-in-from-bottom-4 duration-500">
-        {data.map((item, index) => (
-          <div key={index} className="px-5 py-5">
-            <div className="flex items-start gap-4 mb-4">
-              {item.image && (
-                <div className="relative h-12 w-12 flex-shrink-0 rounded-xl overflow-hidden bg-zinc-900">
-                  <Image
-                    src={item.image}
-                    alt={item.company || item.institution || ""}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              )}
-              <div className="flex-1 min-w-0">
-                <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-x-4">
-                  <div className="min-w-0">
-                    <h3 className="text-[15px] font-semibold text-zinc-100 leading-snug">
-                      {item.company || item.institution}
-                    </h3>
-                    <p className="mt-1 text-sm leading-snug text-zinc-400">
-                      {item.role || item.degree}
-                    </p>
+        {data.map((item, index) => {
+          const location = item.location?.trim();
+
+          return (
+            <div key={index} className="px-5 py-5">
+              <div className="flex items-start gap-4 mb-4">
+                {item.image && (
+                  <div className="relative h-12 w-12 flex-shrink-0 rounded-xl overflow-hidden bg-zinc-900">
+                    <Image
+                      src={item.image}
+                      alt={item.company || item.institution || ""}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
-                  <div className="shrink-0 text-left sm:text-right">
-                    <p className="font-mono text-[11px] leading-4 text-zinc-500">
+                )}
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-x-4">
+                    <div className="min-w-0">
+                      <h3 className="text-[15px] font-semibold text-zinc-100 leading-snug">
+                        {item.company || item.institution}
+                      </h3>
+                      <p className="mt-1 text-sm leading-snug text-zinc-400">
+                        {item.role || item.degree}
+                      </p>
+                  </div>
+                  <div className="shrink-0 text-left sm:max-w-[14rem] sm:text-right">
+                    <p className="text-[13px] font-medium leading-4 text-zinc-300">
                       {item.period}
                     </p>
-                    {item.location && (
-                      <p className="mt-0.5 max-w-[14rem] text-xs font-medium leading-4 text-zinc-500 sm:ml-auto">
-                        {item.location}
+                    {location && (
+                      <p className="mt-1.5 font-mono text-[10px] uppercase leading-4 tracking-[0.08em] text-zinc-500 sm:ml-auto">
+                        {location}
                       </p>
                     )}
+                    </div>
                   </div>
                 </div>
               </div>
+
+              {item.bullets.length > 0 && (
+                <ul className="space-y-1.5 border-t border-zinc-800/60 pt-4 mb-4">
+                  {item.bullets.map((bullet, i) => (
+                    <li
+                      key={i}
+                      className="flex gap-2.5 text-sm text-zinc-400 leading-[1.45]"
+                    >
+                      <span className="mt-[0.5rem] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-zinc-700" />
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {item.links?.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {item.links.map((link, i) => (
+                    <a
+                      key={i}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-zinc-700/60 bg-zinc-800/50 px-3 py-1 text-xs font-medium text-zinc-300 transition-colors hover:border-zinc-600 hover:text-zinc-100"
+                    >
+                      {link.icon === "globe" ? (
+                        <GlobeIcon className="h-3 w-3" />
+                      ) : link.icon === "linkedin" ? (
+                        <LinkedInIcon className="h-3 w-3" />
+                      ) : (
+                        <LinkIcon className="h-3 w-3" />
+                      )}
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
-
-            {item.bullets.length > 0 && (
-              <ul className="space-y-1.5 border-t border-zinc-800/60 pt-4 mb-4">
-                {item.bullets.map((bullet, i) => (
-                  <li
-                    key={i}
-                    className="flex gap-2.5 text-sm text-zinc-400 leading-[1.45]"
-                  >
-                    <span className="mt-[0.5rem] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-zinc-700" />
-                    {bullet}
-                  </li>
-                ))}
-              </ul>
-            )}
-
-            {item.links?.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {item.links.map((link, i) => (
-                  <a
-                    key={i}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-full border border-zinc-700/60 bg-zinc-800/50 px-3 py-1 text-xs font-medium text-zinc-300 transition-colors hover:border-zinc-600 hover:text-zinc-100"
-                  >
-                    {link.icon === "globe" ? (
-                      <GlobeIcon className="h-3 w-3" />
-                    ) : link.icon === "linkedin" ? (
-                      <LinkedInIcon className="h-3 w-3" />
-                    ) : (
-                      <LinkIcon className="h-3 w-3" />
-                    )}
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
