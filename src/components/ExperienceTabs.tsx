@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { GlobeIcon, LinkIcon, LinkedInIcon } from "./Icons";
+import { ArrowRightIcon, GlobeIcon, LinkIcon, LinkedInIcon } from "./Icons";
 import type { ExperienceData } from "@/lib/sanity/types";
 
 export default function ExperienceTabs({
@@ -43,10 +43,7 @@ export default function ExperienceTabs({
           const primaryLink = item.links[0]?.href;
           const headerClassName = `flex items-start gap-4 ${
             showDetails ? "mb-4" : ""
-          } ${
-            !showDetails && primaryLink
-              ? "-m-2 rounded-xl p-2 transition-colors hover:bg-zinc-900/70"
-              : ""
+          } ${!showDetails && primaryLink ? "group/header" : ""
           }`;
           const headerContent = (
             <>
@@ -63,8 +60,11 @@ export default function ExperienceTabs({
               <div className="flex-1 min-w-0">
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-x-4">
                   <div className="min-w-0">
-                    <h3 className="text-base font-semibold leading-5 text-zinc-100">
+                    <h3 className="inline-flex items-center gap-1.5 text-base font-semibold leading-5 text-zinc-100">
                       {item.company || item.institution}
+                      {!showDetails && primaryLink && (
+                        <ArrowRightIcon className="h-4 w-4 -translate-x-1 text-zinc-300 opacity-0 transition-all group-hover/header:translate-x-0 group-hover/header:opacity-100" />
+                      )}
                     </h3>
                     <p className="mt-1 text-[13px] font-medium leading-5 text-zinc-400">
                       {item.role || item.degree}

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { getGitHubContributionActivity } from "@/lib/github/activity";
 
 const weekdayLabels = ["", "Mon", "", "Wed", "", "Fri", ""];
@@ -32,7 +33,14 @@ export default async function GitHubActivity({
     );
   }
 
-  const graphColumns = `repeat(${activity.weeks.length}, minmax(0, 1fr))`;
+  const graphColumns = `repeat(${activity.weeks.length}, var(--activity-cell))`;
+  const activityStyle = {
+    "--activity-cell": "9px",
+    "--activity-gap": "2px",
+  } as CSSProperties;
+  const graphStyle = {
+    gridTemplateColumns: graphColumns,
+  } as CSSProperties;
 
   return (
     <Link
@@ -42,46 +50,73 @@ export default async function GitHubActivity({
       aria-label="Open GitHub profile"
       className="block overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 sm:p-5"
     >
-      <div
-        className="mb-2 grid min-w-0 gap-[2px] pl-7 text-[10px] leading-none text-zinc-500 sm:pl-8 sm:text-[11px]"
-        style={{ gridTemplateColumns: graphColumns }}
-      >
-        {activity.monthLabels.map((month) => (
-          <span
-            key={`${month.label}-${month.weekIndex}`}
-            style={{ gridColumnStart: month.weekIndex + 1 }}
+      <div className="github-activity-scroll overflow-x-auto pb-2">
+        <div className="min-w-max" style={activityStyle}>
+          <div
+            className="mb-2 grid pl-8 text-[10px] leading-none text-zinc-500 sm:text-[11px]"
+            style={{
+              ...graphStyle,
+              columnGap: "var(--activity-gap)",
+            }}
           >
-            {month.label}
-          </span>
-        ))}
-      </div>
+            {activity.monthLabels.map((month) => (
+              <span
+                key={`${month.label}-${month.weekIndex}`}
+                style={{ gridColumnStart: month.weekIndex + 1 }}
+              >
+                {month.label}
+              </span>
+            ))}
+          </div>
 
-      <div className="flex min-w-0 gap-2">
-        <div className="grid grid-rows-7 text-[10px] leading-[10px] text-zinc-500 sm:text-[11px] sm:leading-[11px]">
-          {weekdayLabels.map((label, index) => (
-            <span key={`${label}-${index}`} className="h-[10px] sm:h-[11px]">
-              {label}
-            </span>
-          ))}
-        </div>
-
-        <div
-          className="grid min-w-0 flex-1 gap-[2px]"
-          style={{ gridTemplateColumns: graphColumns }}
-        >
-          {activity.weeks.map((week, weekIndex) => (
+          <div className="flex gap-2">
             <div
-              key={`week-${weekIndex}`}
-              className="grid min-w-0 grid-rows-7 gap-[2px]"
+              className="grid w-6 text-[10px] text-zinc-500 sm:text-[11px]"
+              style={{
+                gridTemplateRows: "repeat(7, var(--activity-cell))",
+                rowGap: "var(--activity-gap)",
+              } as CSSProperties}
             >
-              {week.map((day, dayIndex) => (
+              {weekdayLabels.map((label, index) => (
                 <span
-                  key={day ? day.date : `empty-${weekIndex}-${dayIndex}`}
-                  className={`aspect-square w-full rounded-[2px] ${day ? levelClasses[day.level] : levelClasses[0]}`}
-                />
+                  key={`${label}-${index}`}
+                  className="flex items-center leading-none"
+                >
+                  {label}
+                </span>
               ))}
             </div>
-          ))}
+
+            <div
+              className="grid"
+              style={{
+                ...graphStyle,
+                columnGap: "var(--activity-gap)",
+              }}
+            >
+              {activity.weeks.map((week, weekIndex) => (
+                <div
+                  key={`week-${weekIndex}`}
+                  className="grid"
+                  style={{
+                    gridTemplateRows: "repeat(7, var(--activity-cell))",
+                    rowGap: "var(--activity-gap)",
+                  } as CSSProperties}
+                >
+                  {week.map((day, dayIndex) => (
+                    <span
+                      key={day ? day.date : `empty-${weekIndex}-${dayIndex}`}
+                      className={`block rounded-[2px] ${day ? levelClasses[day.level] : levelClasses[0]}`}
+                      style={{
+                        width: "var(--activity-cell)",
+                        height: "var(--activity-cell)",
+                      }}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </Link>

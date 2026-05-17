@@ -22,3 +22,26 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
 }
+
+.github-activity-scroll {
+  scrollbar-color: #3f3f46 transparent;
+  scrollbar-width: thin;
+}
+
+.github-activity-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.github-activity-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.github-activity-scroll::-webkit-scrollbar-thumb {
+  background-color: #3f3f46;
+  border: 2px solid #18181b;
+  border-radius: 999px;
+}
+
+.github-activity-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: #52525b;
+}
