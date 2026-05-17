@@ -10,7 +10,6 @@ import {
 } from "@/components/Icons";
 import ExperienceTabs from "@/components/ExperienceTabs";
 import ProjectCard from "@/components/ProjectCard";
-import FreelanceCard from "@/components/FreelanceCard";
 import Footer from "@/components/Footer";
 import GitHubActivity from "@/components/GitHubActivity";
 import SocialLink from "@/components/SocialLink";
@@ -25,9 +24,6 @@ export default async function Home() {
   const tagline = data.profile.tagline.replace("{age}", age.toString());
   const personalProjects = data.projects.filter(
     (project) => project.kind === "personal",
-  );
-  const freelanceProjects = data.projects.filter(
-    (project) => project.kind === "freelance",
   );
 
   return (
@@ -109,26 +105,27 @@ export default async function Home() {
 
         {/* Projects Section */}
         <section className="mb-20">
-          <div className="flex items-center justify-between mb-8">
+          <div className="mb-8">
             <h2 className="text-xl font-semibold text-zinc-100">
               Featured Projects
             </h2>
-            <Link
-              href="/projects"
-              className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors flex items-center gap-1"
-            >
-              View All
-              <ArrowRightIcon className="h-4 w-4" />
-            </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <FreelanceCard projects={freelanceProjects} />
             {personalProjects
               .filter((project) => project.featured)
               .slice(0, 4)
               .map((project, index) => (
                 <ProjectCard key={index} project={project} />
               ))}
+          </div>
+          <div className="mt-8 flex justify-center">
+            <Link
+              href="/projects"
+              className="group inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/40 px-4 py-2 text-sm font-medium text-zinc-300 transition-colors hover:border-zinc-700 hover:bg-zinc-900 hover:text-zinc-100"
+            >
+              View more projects
+              <ArrowRightIcon className="h-4 w-4 text-zinc-500 transition-transform group-hover:translate-x-0.5 group-hover:text-zinc-300" />
+            </Link>
           </div>
         </section>
 
