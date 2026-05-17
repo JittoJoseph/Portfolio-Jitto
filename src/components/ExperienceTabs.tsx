@@ -8,13 +8,16 @@ import type { ExperienceData } from "@/lib/sanity/types";
 export default function ExperienceTabs({
   career,
   education,
+  showExperienceDetails,
 }: {
   career: ExperienceData[];
   education: ExperienceData[];
+  showExperienceDetails: boolean;
 }) {
   const [activeTab, setActiveTab] = useState<"work" | "education">("work");
 
   const data = activeTab === "work" ? career : education;
+  const showDetails = activeTab === "education" || showExperienceDetails;
 
   return (
     <div className="w-full rounded-2xl border border-zinc-800 bg-zinc-950">
@@ -37,45 +40,67 @@ export default function ExperienceTabs({
       <div className="divide-y divide-zinc-800/60 animate-in fade-in slide-in-from-bottom-4 duration-500">
         {data.map((item, index) => {
           const location = item.location?.trim();
-
-          return (
-            <div key={index} className="px-5 py-5">
-              <div className="flex items-start gap-4 mb-4">
-                {item.image && (
-                  <div className="relative h-12 w-12 flex-shrink-0 rounded-xl overflow-hidden bg-zinc-900">
-                    <Image
-                      src={item.image}
-                      alt={item.company || item.institution || ""}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                )}
-                <div className="flex-1 min-w-0">
-                  <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-x-4">
-                    <div className="min-w-0">
-                      <h3 className="text-[15px] font-semibold text-zinc-100 leading-snug">
-                        {item.company || item.institution}
-                      </h3>
-                      <p className="mt-1 text-sm leading-snug text-zinc-400">
-                        {item.role || item.degree}
-                      </p>
+          const primaryLink = item.links[0]?.href;
+          const headerClassName = `flex items-start gap-4 ${
+            showDetails ? "mb-4" : ""
+          } ${
+            !showDetails && primaryLink
+              ? "-m-2 rounded-xl p-2 transition-colors hover:bg-zinc-900/70"
+              : ""
+          }`;
+          const headerContent = (
+            <>
+              {item.image && (
+                <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-xl bg-zinc-900">
+                  <Image
+                    src={item.image}
+                    alt={item.company || item.institution || ""}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              )}
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-x-4">
+                  <div className="min-w-0">
+                    <h3 className="text-[15px] font-semibold leading-snug text-zinc-100">
+                      {item.company || item.institution}
+                    </h3>
+                    <p className="mt-1 text-sm leading-snug text-zinc-400">
+                      {item.role || item.degree}
+                    </p>
                   </div>
                   <div className="shrink-0 text-left sm:max-w-[14rem] sm:text-right">
                     <p className="text-[13px] font-medium leading-4 text-zinc-300">
                       {item.period}
                     </p>
                     {location && (
-                      <p className="mt-1.5 font-mono text-[10px] uppercase leading-4 tracking-[0.08em] text-zinc-500 sm:ml-auto">
+                      <p className="mt-1.5 font-mono text-[10px] leading-4 tracking-[0.08em] text-zinc-500 sm:ml-auto">
                         {location}
                       </p>
                     )}
-                    </div>
                   </div>
                 </div>
               </div>
+            </>
+          );
 
-              {item.bullets.length > 0 && (
+          return (
+            <div key={index} className="px-5 py-5">
+              {!showDetails && primaryLink ? (
+                <a
+                  href={primaryLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={headerClassName}
+                >
+                  {headerContent}
+                </a>
+              ) : (
+                <div className={headerClassName}>{headerContent}</div>
+              )}
+
+              {showDetails && item.bullets.length > 0 && (
                 <ul className="space-y-1.5 border-t border-zinc-800/60 pt-4 mb-4">
                   {item.bullets.map((bullet, i) => (
                     <li
@@ -89,7 +114,7 @@ export default function ExperienceTabs({
                 </ul>
               )}
 
-              {item.links?.length > 0 && (
+              {showDetails && item.links?.length > 0 && (
                 <div className="flex flex-wrap gap-2">
                   {item.links.map((link, i) => (
                     <a

@@ -46,6 +46,14 @@ export const profileType = defineType({
         "Enable or disable the GitHub code activity section on the landing page.",
       initialValue: true,
     }),
+    defineField({
+      name: "showExperienceDetails",
+      title: "Show work experience bullets and links",
+      type: "boolean",
+      description:
+        "When disabled, work experience items show only the header and link to the first configured link. Education is not affected.",
+      initialValue: true,
+    }),
   ],
   preview: {
     select: {

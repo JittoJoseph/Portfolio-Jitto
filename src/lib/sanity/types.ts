@@ -11,6 +11,7 @@ export type ProfileData = {
   bio: string;
   headshotUrl: string;
   showCodeActivity: boolean;
+  showExperienceDetails: boolean;
 };
 
 export type SocialsData = {

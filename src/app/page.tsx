@@ -91,7 +91,11 @@ export default async function Home() {
 
         {/* Experience & Education Tabs */}
         <section className="mb-16">
-          <ExperienceTabs career={data.career} education={data.education} />
+          <ExperienceTabs
+            career={data.career}
+            education={data.education}
+            showExperienceDetails={data.profile.showExperienceDetails}
+          />
         </section>
 
         {data.profile.showCodeActivity && (
