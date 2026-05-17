@@ -43,8 +43,7 @@ export default function ExperienceTabs({
           const primaryLink = item.links[0]?.href;
           const headerClassName = `flex items-start gap-4 ${
             showDetails ? "mb-4" : ""
-          } ${!showDetails && primaryLink ? "group/header" : ""
-          }`;
+          } ${!showDetails && primaryLink ? "group/header" : ""}`;
           const headerContent = (
             <>
               {item.image && (
@@ -66,7 +65,7 @@ export default function ExperienceTabs({
                         <ArrowRightIcon className="h-4 w-4 -translate-x-1 text-zinc-300 opacity-0 transition-all group-hover/header:translate-x-0 group-hover/header:opacity-100" />
                       )}
                     </h3>
-                    <p className="mt-1 text-[13px] font-medium leading-5 text-zinc-400">
+                    <p className="mt-1 text-sm font-medium leading-5 text-zinc-300/90">
                       {item.role || item.degree}
                     </p>
                   </div>
