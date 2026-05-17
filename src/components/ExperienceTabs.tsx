@@ -63,19 +63,19 @@ export default function ExperienceTabs({
               <div className="flex-1 min-w-0">
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-x-4">
                   <div className="min-w-0">
-                    <h3 className="text-[15px] font-semibold leading-snug text-zinc-100">
+                    <h3 className="text-base font-semibold leading-5 text-zinc-100">
                       {item.company || item.institution}
                     </h3>
-                    <p className="mt-1 text-sm leading-snug text-zinc-400">
+                    <p className="mt-1 text-[13px] font-medium leading-5 text-zinc-400">
                       {item.role || item.degree}
                     </p>
                   </div>
                   <div className="shrink-0 text-left sm:max-w-[14rem] sm:text-right">
-                    <p className="text-[13px] font-medium leading-4 text-zinc-300">
+                    <p className="text-[13px] font-medium leading-5 text-zinc-300">
                       {item.period}
                     </p>
                     {location && (
-                      <p className="mt-1.5 font-mono text-[10px] leading-4 tracking-[0.08em] text-zinc-500 sm:ml-auto">
+                      <p className="mt-0.5 text-[13px] font-normal leading-5 text-zinc-500 sm:ml-auto">
                         {location}
                       </p>
                     )}
