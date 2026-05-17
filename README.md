@@ -13,6 +13,7 @@ A personal portfolio website built with Next.js and Sanity CMS. Showcases projec
 - Experience timeline
 - Social media integration
 - Content managed via Sanity Studio
+- On-demand ISR updates from Sanity without redeploying
 
 ## Tech Stack
 
@@ -20,3 +21,15 @@ A personal portfolio website built with Next.js and Sanity CMS. Showcases projec
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS
 - **CMS:** Sanity
+
+## Sanity Content Updates
+
+Set `SANITY_WEBHOOK_SECRET` in Vercel, then point the Sanity publish webhook to:
+
+```text
+https://<your-domain>/api/revalidate?secret=<SANITY_WEBHOOK_SECRET>
+```
+
+Use `POST` requests. The route invalidates the cached portfolio data and the
+affected pages (`/` and `/projects`), so the next request regenerates fresh
+server-rendered HTML without a Vercel rebuild.

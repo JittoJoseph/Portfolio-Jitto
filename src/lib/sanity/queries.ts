@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { getSanityClient } from "./client";
 import type {
   ExperienceData,
@@ -7,6 +8,9 @@ import type {
   ProjectData,
   SocialsData,
 } from "./types";
+
+export const PORTFOLIO_REVALIDATE_SECONDS = 3600;
+export const SANITY_PORTFOLIO_TAG = "sanity:portfolio";
 
 type RawProfile = {
   fullName?: string;
@@ -157,7 +161,7 @@ function normalizeExperience(raw: RawExperience[] = []): ExperienceData[] {
     }));
 }
 
-export async function getPortfolioData(): Promise<PortfolioData> {
+async function fetchPortfolioData(): Promise<PortfolioData> {
   const client = getSanityClient();
 
   if (!client) {
@@ -205,6 +209,15 @@ export async function getPortfolioData(): Promise<PortfolioData> {
     education,
   };
 }
+
+export const getPortfolioData = unstable_cache(
+  fetchPortfolioData,
+  ["portfolio-data"],
+  {
+    revalidate: PORTFOLIO_REVALIDATE_SECONDS,
+    tags: [SANITY_PORTFOLIO_TAG],
+  }
+);
 
 export async function hasPortfolioContent(): Promise<boolean> {
   const client = getSanityClient();

@@ -17,6 +17,7 @@ export const sanityEnv = {
   ),
   apiVersion: clean(process.env.NEXT_PUBLIC_SANITY_API_VERSION) ?? "2025-03-01",
   readToken: clean(process.env.SANITY_API_READ_TOKEN),
+  webhookSecret: clean(process.env.SANITY_WEBHOOK_SECRET),
 } as const;
 
 export const isSanityConfigured = Boolean(
