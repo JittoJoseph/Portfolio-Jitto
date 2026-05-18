@@ -20,7 +20,7 @@ export default function ExperienceTabs({
   const showDetails = activeTab === "education" || showExperienceDetails;
 
   return (
-    <div className="w-full rounded-2xl border border-zinc-800 bg-zinc-950">
+    <div className="relative z-30 w-full rounded-2xl border border-zinc-800 bg-zinc-950">
       <div className="flex border-b border-zinc-800/80 p-1.5 gap-1.5">
         {(["work", "education"] as const).map((tab) => (
           <button

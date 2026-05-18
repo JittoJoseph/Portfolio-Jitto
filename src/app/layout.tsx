@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { GeistPixelSquare } from "geist/font/pixel";
 import Script from "next/script";
+import PixelCompanion from "@/components/PixelCompanion";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -117,6 +118,7 @@ export default function RootLayout({
           `}
         </Script>
         {children}
+        <PixelCompanion />
       </body>
     </html>
   );
