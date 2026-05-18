@@ -18,6 +18,7 @@ type RawProfile = {
   tagline?: string;
   bio?: string;
   headshotUrl?: string;
+  enablePixelCompanion?: boolean;
   showCodeActivity?: boolean;
   showExperienceDetails?: boolean;
 };
@@ -63,6 +64,7 @@ const profileQuery = `*[_type == "profile" && _id == "profile-main"][0]{
   tagline,
   bio,
   "headshotUrl": headshot.asset->url,
+  enablePixelCompanion,
   showCodeActivity,
   showExperienceDetails
 }`;
@@ -113,6 +115,7 @@ function normalizeProfile(raw?: RawProfile | null): ProfileData | null {
     tagline: raw.tagline,
     bio: raw.bio,
     headshotUrl: raw.headshotUrl,
+    enablePixelCompanion: raw.enablePixelCompanion ?? false,
     showCodeActivity: raw.showCodeActivity ?? true,
     showExperienceDetails: raw.showExperienceDetails ?? true,
   };

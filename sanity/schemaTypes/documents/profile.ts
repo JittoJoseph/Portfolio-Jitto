@@ -54,6 +54,14 @@ export const profileType = defineType({
         "When disabled, work experience items show only the header and link to the first configured link. Education is not affected.",
       initialValue: true,
     }),
+    defineField({
+      name: "enablePixelCompanion",
+      title: "Enable pixel companion",
+      type: "boolean",
+      description:
+        "Enable the lightweight Bob pixel companion overlay. Disabled by default for performance and a cleaner portfolio.",
+      initialValue: false,
+    }),
   ],
   preview: {
     select: {

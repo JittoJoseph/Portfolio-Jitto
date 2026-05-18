@@ -12,6 +12,7 @@ import ExperienceTabs from "@/components/ExperienceTabs";
 import ProjectCard from "@/components/ProjectCard";
 import Footer from "@/components/Footer";
 import GitHubActivity from "@/components/GitHubActivity";
+import PixelCompanion from "@/components/PixelCompanion";
 import SocialLink from "@/components/SocialLink";
 import { calculateAge } from "@/lib/utils";
 import { getPortfolioData } from "@/lib/sanity/queries";
@@ -27,8 +28,9 @@ export default async function Home() {
   );
 
   return (
-    <main className="min-h-screen bg-zinc-950 text-zinc-200 selection:bg-zinc-800 selection:text-zinc-100 font-sans">
-      <div className="mx-auto max-w-2xl px-6 pt-24 pb-8">
+    <>
+      <main className="min-h-screen bg-zinc-950 text-zinc-200 selection:bg-zinc-800 selection:text-zinc-100 font-sans">
+        <div className="mx-auto max-w-2xl px-6 pt-24 pb-8">
         {/* Hero Section */}
         <section className="mb-24 flex flex-col-reverse gap-8 md:flex-row md:items-center md:justify-between">
           <div className="flex-1 space-y-6">
@@ -154,7 +156,9 @@ export default async function Home() {
         </section>
 
         <Footer socials={data.socials} />
-      </div>
-    </main>
+        </div>
+      </main>
+      {data.profile.enablePixelCompanion && <PixelCompanion />}
+    </>
   );
 }

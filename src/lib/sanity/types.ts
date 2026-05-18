@@ -10,6 +10,7 @@ export type ProfileData = {
   tagline: string;
   bio: string;
   headshotUrl: string;
+  enablePixelCompanion: boolean;
   showCodeActivity: boolean;
   showExperienceDetails: boolean;
 };
