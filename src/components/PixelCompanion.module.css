@@ -42,8 +42,25 @@
   background-size: 384px 32px;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+  opacity: 0;
   transform: scale(2);
   transform-origin: 0 100%;
+}
+
+.idleSheet {
+  background-image: url("/framesets/Bob_idle_anim_16x16.png");
+}
+
+.runSheet {
+  background-image: url("/framesets/Bob_run_16x16.png");
+}
+
+.activeSheet {
+  opacity: 1;
+}
+
+.running .sheet {
+  transform: scaleX(2.04) scaleY(1.96);
 }
 
 .visible {
@@ -62,6 +79,10 @@
 
   .sheet {
     transform: scale(1.75);
+  }
+
+  .running .sheet {
+    transform: scaleX(1.785) scaleY(1.715);
   }
 }
 

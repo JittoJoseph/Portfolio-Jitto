@@ -15,9 +15,6 @@ const WALK_SPEED = 58;
 const HURRY_SPEED = 88;
 const TURN_PAUSE_MS = 110;
 const IDLE_SETTLE_MS = 850;
-const SELF_ATTENTION_MS = 650;
-const IDLE_SHEET = "/framesets/Bob_idle_anim_16x16.png";
-const RUN_SHEET = "/framesets/Bob_run_16x16.png";
 
 const DIRECTION_OFFSET: Record<Direction, number> = {
   right: 0,
@@ -63,14 +60,6 @@ function distance(a: Point, b: Point) {
 
 function directionFromDelta(dx: number, dy: number): Direction {
   if (Math.abs(dx) > Math.abs(dy)) {
-    return dx >= 0 ? "right" : "left";
-  }
-
-  return dy >= 0 ? "down" : "up";
-}
-
-function attentionDirectionFromDelta(dx: number, dy: number): Direction {
-  if (Math.abs(dx) > Math.abs(dy) * 0.8) {
     return dx >= 0 ? "right" : "left";
   }
 
@@ -603,9 +592,7 @@ export default function PixelCompanion() {
   const idleSettleAtRef = useRef<number | null>(null);
   const entranceTargetRef = useRef<Point | null>(null);
   const pauseUntilRef = useRef(0);
-  const selfAttentionUntilRef = useRef(0);
-  const selfHoverCooldownUntilRef = useRef(0);
-  const selfPointerInsideRef = useRef(false);
+  const bobHoveredRef = useRef(false);
   const restingRef = useRef(false);
   const wasMovingRef = useRef(false);
   const lastMoveTickRef = useRef(0);
@@ -625,11 +612,6 @@ export default function PixelCompanion() {
   });
 
   useEffect(() => {
-    const idleImage = new Image();
-    const runImage = new Image();
-    idleImage.src = IDLE_SHEET;
-    runImage.src = RUN_SHEET;
-
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
@@ -696,35 +678,6 @@ export default function PixelCompanion() {
       pauseUntilRef.current = performance.now() + 90;
     };
 
-    const faceTowardPoint = (point: Point, time: number) => {
-      const companion = getCompanionSize();
-      const center = {
-        x: positionRef.current.x + companion.width * 0.5,
-        y: positionRef.current.y + companion.height * 0.58,
-      };
-      const direction = attentionDirectionFromDelta(
-        point.x - center.x,
-        point.y - center.y,
-      );
-
-      pauseUntilRef.current = Math.max(pauseUntilRef.current, time + 260);
-      selfAttentionUntilRef.current = time + SELF_ATTENTION_MS;
-      idleSettleAtRef.current = time + SELF_ATTENTION_MS + 420;
-      directionRef.current = direction;
-
-      if (direction !== "up") {
-        readableDirectionRef.current = direction;
-      }
-
-      setSprite((current) => ({
-        ...current,
-        direction,
-        mode: "idle",
-        resting: restingRef.current,
-        visible: true,
-      }));
-    };
-
     const settleNearPageStructure = () => {
       if (performance.now() < holdUntilRef.current) {
         return;
@@ -759,8 +712,7 @@ export default function PixelCompanion() {
       frameRef.current = (frameRef.current + 1) % FRAMES_PER_DIRECTION;
       const shouldSettleForward = !moving &&
         idleSettleAtRef.current !== null &&
-        time >= idleSettleAtRef.current &&
-        time >= selfAttentionUntilRef.current;
+        time >= idleSettleAtRef.current;
       const displayDirection = shouldSettleForward
         ? "down"
         : !moving && direction === "up"
@@ -817,6 +769,12 @@ export default function PixelCompanion() {
       let moving = false;
       let direction = restingRef.current ? "down" : directionRef.current;
       const nextWaypoint = pathRef.current[0];
+
+      if (bobHoveredRef.current) {
+        updateSprite(time, false, "down");
+        animationFrameRef.current = requestAnimationFrame(loop);
+        return;
+      }
 
       if (time < pauseUntilRef.current) {
         updateSprite(time, false, direction);
@@ -889,17 +847,16 @@ export default function PixelCompanion() {
     };
 
     const onPointerMove = (event: PointerEvent) => {
-      const now = performance.now();
       const companion = getCompanionSize();
       const pointer = {
         x: event.clientX,
         y: event.clientY + window.scrollY,
       };
       const bounds = {
-        left: positionRef.current.x - 10,
-        right: positionRef.current.x + companion.width + 10,
-        top: positionRef.current.y - 8,
-        bottom: positionRef.current.y + companion.height + 8,
+        left: positionRef.current.x,
+        right: positionRef.current.x + companion.width,
+        top: positionRef.current.y,
+        bottom: positionRef.current.y + companion.height,
       };
       const inside = pointer.x >= bounds.left &&
         pointer.x <= bounds.right &&
@@ -907,17 +864,25 @@ export default function PixelCompanion() {
         pointer.y <= bounds.bottom;
 
       if (!inside) {
-        selfPointerInsideRef.current = false;
+        bobHoveredRef.current = false;
         return;
       }
 
-      if (selfPointerInsideRef.current || now < selfHoverCooldownUntilRef.current) {
+      if (bobHoveredRef.current) {
         return;
       }
 
-      selfPointerInsideRef.current = true;
-      selfHoverCooldownUntilRef.current = now + 1800;
-      faceTowardPoint(pointer, now);
+      bobHoveredRef.current = true;
+      idleSettleAtRef.current = null;
+      directionRef.current = "down";
+      readableDirectionRef.current = "down";
+      setSprite((current) => ({
+        ...current,
+        direction: "down",
+        mode: "idle",
+        resting: restingRef.current,
+        visible: true,
+      }));
     };
 
     const onScroll = () => {
@@ -1033,13 +998,27 @@ export default function PixelCompanion() {
         className={[
           styles.sprite,
           sprite.visible ? styles.visible : "",
+          sprite.mode === "run" ? styles.running : "",
           sprite.resting ? styles.resting : "",
         ].join(" ")}
       >
         <div
-          className={styles.sheet}
+          className={[
+            styles.sheet,
+            styles.idleSheet,
+            sprite.mode === "idle" ? styles.activeSheet : "",
+          ].join(" ")}
           style={{
-            backgroundImage: `url(${sprite.mode === "run" ? RUN_SHEET : IDLE_SHEET})`,
+            backgroundPosition: `-${frameIndex * FRAME_WIDTH}px 0px`,
+          }}
+        />
+        <div
+          className={[
+            styles.sheet,
+            styles.runSheet,
+            sprite.mode === "run" ? styles.activeSheet : "",
+          ].join(" ")}
+          style={{
             backgroundPosition: `-${frameIndex * FRAME_WIDTH}px 0px`,
           }}
         />
