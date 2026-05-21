@@ -14,7 +14,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
-  { id: "home", href: "#", label: "Home", icon: HomeIcon },
+  { id: "home", href: "/#home", label: "Home", icon: HomeIcon },
   { id: "projects", href: "#projects", label: "Projects", icon: CodeIcon },
   {
     id: "hackathons",
@@ -38,7 +38,7 @@ export default function FloatingDock() {
                     href={item.href}
                     className={cn(
                       buttonVariants({ variant: "ghost", size: "icon" }),
-                      "size-12 transition-colors"
+                      "size-12 transition-colors",
                     )}
                   >
                     <item.icon className="size-4" />

@@ -24,7 +24,7 @@ export default async function GitHubActivity({
         href={githubProfileUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="block rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 sm:p-5"
+        className="block rounded-xl py-1"
       >
         <p className="text-sm text-zinc-400">
           GitHub activity is unavailable right now.
@@ -48,7 +48,7 @@ export default async function GitHubActivity({
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Open GitHub profile"
-      className="block overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 sm:p-5"
+      className="block overflow-hidden rounded-xl py-1"
     >
       <div className="github-activity-scroll overflow-x-auto pb-2">
         <div className="min-w-max" style={activityStyle}>
@@ -72,10 +72,12 @@ export default async function GitHubActivity({
           <div className="flex gap-2">
             <div
               className="grid w-6 text-[10px] text-zinc-500 sm:text-[11px]"
-              style={{
-                gridTemplateRows: "repeat(7, var(--activity-cell))",
-                rowGap: "var(--activity-gap)",
-              } as CSSProperties}
+              style={
+                {
+                  gridTemplateRows: "repeat(7, var(--activity-cell))",
+                  rowGap: "var(--activity-gap)",
+                } as CSSProperties
+              }
             >
               {weekdayLabels.map((label, index) => (
                 <span
@@ -98,10 +100,12 @@ export default async function GitHubActivity({
                 <div
                   key={`week-${weekIndex}`}
                   className="grid"
-                  style={{
-                    gridTemplateRows: "repeat(7, var(--activity-cell))",
-                    rowGap: "var(--activity-gap)",
-                  } as CSSProperties}
+                  style={
+                    {
+                      gridTemplateRows: "repeat(7, var(--activity-cell))",
+                      rowGap: "var(--activity-gap)",
+                    } as CSSProperties
+                  }
                 >
                   {week.map((day, dayIndex) => (
                     <span

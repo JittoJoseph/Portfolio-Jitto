@@ -31,7 +31,10 @@ export default async function Home() {
 
   return (
     <>
-      <main className="min-h-screen bg-zinc-950 text-zinc-200 selection:bg-zinc-800 selection:text-zinc-100 font-sans">
+      <main
+        id="home"
+        className="min-h-screen bg-zinc-950 text-zinc-200 selection:bg-zinc-800 selection:text-zinc-100 font-sans"
+      >
         <div className="mx-auto max-w-2xl px-6 pt-24 pb-8">
           {/* Hero Section */}
           <section className="mb-24 flex flex-col-reverse gap-8 md:flex-row md:items-center md:justify-between">
@@ -107,7 +110,9 @@ export default async function Home() {
               <h2 className="text-xl font-semibold text-zinc-100 mb-4">
                 Code Activity
               </h2>
-              <GitHubActivity githubProfileUrl={data.socials.github} />
+              <div className="rounded-2xl border border-zinc-800 bg-zinc-950 p-3">
+                <GitHubActivity githubProfileUrl={data.socials.github} />
+              </div>
             </section>
           )}
 
