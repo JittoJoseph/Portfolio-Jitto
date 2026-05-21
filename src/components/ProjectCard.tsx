@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
   GitHubIcon,
   GlobeIcon,
@@ -22,6 +23,7 @@ export default function ProjectCard({
             src={project.image}
             alt={project.title}
             fill
+            sizes="(min-width: 640px) 50vw, 100vw"
             className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-500"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
@@ -51,7 +53,7 @@ export default function ProjectCard({
         </div>
         <div className="flex items-center gap-3 pt-2 border-t border-zinc-800/60">
           {project.links.map((link, i) => (
-            <a
+            <Link
               key={i}
               href={link.href}
               target="_blank"
@@ -68,7 +70,7 @@ export default function ProjectCard({
                 <LinkIcon className="h-3.5 w-3.5" />
               )}
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
       </div>

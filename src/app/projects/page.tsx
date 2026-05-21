@@ -65,18 +65,18 @@ export default async function ProjectsPage() {
 
           {/* Section nav */}
           <div className="flex items-center gap-2 border-t border-zinc-800/60 pt-6">
-            <a
+            <Link
               href="#personal"
               className="inline-flex items-center gap-1.5 rounded-full bg-zinc-800/80 border border-zinc-700/60 px-4 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-700/80 hover:text-white transition-all"
             >
               Personal
-            </a>
-            <a
+            </Link>
+            <Link
               href="#freelance"
               className="inline-flex items-center gap-1.5 rounded-full bg-zinc-800/80 border border-zinc-700/60 px-4 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-700/80 hover:text-white transition-all"
             >
               Freelance
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -123,13 +123,13 @@ export default async function ProjectsPage() {
             or just a good conversation about tech.
           </p>
           <div className="flex items-center justify-center gap-3">
-            <a
+            <Link
               href="mailto:jittojosephcareer@gmail.com"
               className="inline-flex items-center gap-2 rounded-full bg-zinc-100 px-5 py-2 text-sm font-medium text-zinc-900 hover:bg-white transition-colors"
             >
               Get in touch
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://www.linkedin.com/in/jittojoseph17/"
               target="_blank"
               rel="noopener noreferrer"
@@ -137,7 +137,7 @@ export default async function ProjectsPage() {
             >
               <LinkedInIcon className="h-4 w-4" />
               LinkedIn
-            </a>
+            </Link>
           </div>
         </div>
         </div>

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function SocialLink({
   href,
   icon,
@@ -8,7 +10,7 @@ export default function SocialLink({
   label: string;
 }) {
   return (
-    <a
+    <Link
       href={href}
       target="_blank"
       rel="noopener noreferrer"
@@ -16,6 +18,6 @@ export default function SocialLink({
       aria-label={label}
     >
       {icon}
-    </a>
+    </Link>
   );
 }

@@ -50,7 +50,7 @@ export default async function Home() {
 
               <div className="flex flex-wrap gap-4 pt-4">
                 {/* Resume Button */}
-                <a
+                <Link
                   href={data.socials.resumeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -58,7 +58,7 @@ export default async function Home() {
                 >
                   <FileTextIcon className="h-4 w-4" />
                   Resume
-                </a>
+                </Link>
 
                 {/* Social Icons */}
                 <div className="flex items-center gap-4 px-2">
@@ -90,6 +90,7 @@ export default async function Home() {
                 src={data.profile.headshotUrl}
                 alt={data.profile.fullName}
                 fill
+                sizes="(min-width: 768px) 10rem, 8rem"
                 className="object-cover"
                 priority
               />

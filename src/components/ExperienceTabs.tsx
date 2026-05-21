@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRightIcon, GlobeIcon, LinkIcon, LinkedInIcon } from "./Icons";
 import type { ExperienceData } from "@/lib/sanity/types";
 
@@ -52,6 +53,7 @@ export default function ExperienceTabs({
                     src={item.image}
                     alt={item.company || item.institution || ""}
                     fill
+                    sizes="3rem"
                     className="object-cover"
                   />
                 </div>
@@ -87,14 +89,14 @@ export default function ExperienceTabs({
           return (
             <div key={index} className="px-5 py-5">
               {!showDetails && primaryLink ? (
-                <a
+                <Link
                   href={primaryLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={headerClassName}
                 >
                   {headerContent}
-                </a>
+                </Link>
               ) : (
                 <div className={headerClassName}>{headerContent}</div>
               )}
@@ -116,7 +118,7 @@ export default function ExperienceTabs({
               {showDetails && item.links?.length > 0 && (
                 <div className="flex flex-wrap gap-2">
                   {item.links.map((link, i) => (
-                    <a
+                    <Link
                       key={i}
                       href={link.href}
                       target="_blank"
@@ -131,7 +133,7 @@ export default function ExperienceTabs({
                         <LinkIcon className="h-3 w-3" />
                       )}
                       {link.label}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               )}
