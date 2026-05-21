@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRightIcon } from "@/components/Icons";
 import type { RecognitionData } from "@/lib/sanity/types";
 
 type HackathonsProps = {
@@ -19,8 +20,8 @@ export default function Hackathons({ recognitions }: HackathonsProps) {
         {recognitions.map((hackathon) => (
           <article
             key={hackathon._id}
-            className={`relative rounded-xl border border-zinc-800/50 bg-zinc-900/20 p-4 transition-colors hover:border-zinc-700/70 hover:bg-zinc-900/30${
-              hackathon.link ? " cursor-pointer" : ""
+            className={`relative rounded-2xl border border-zinc-800 bg-zinc-950 p-4${
+              hackathon.link ? " group cursor-pointer" : ""
             }`}
           >
             {hackathon.link && (
@@ -28,14 +29,14 @@ export default function Hackathons({ recognitions }: HackathonsProps) {
                 href={hackathon.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute inset-0 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500/60 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+                className="absolute inset-0 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500/60 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
                 aria-label={`Open ${hackathon.event}`}
               >
                 <span className="sr-only">Open {hackathon.event}</span>
               </Link>
             )}
             <div className="flex items-start gap-4">
-              <div className="relative h-20 w-24 shrink-0 overflow-hidden rounded-lg border border-zinc-800/50 bg-zinc-900">
+              <div className="relative h-20 w-24 shrink-0 overflow-hidden rounded-lg bg-zinc-900">
                 <Image
                   src={hackathon.image}
                   alt={hackathon.event}
@@ -53,8 +54,11 @@ export default function Hackathons({ recognitions }: HackathonsProps) {
                     {hackathon.context}
                   </span>
                 </div>
-                <h3 className="text-sm font-semibold text-zinc-100 leading-snug">
+                <h3 className="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-100 leading-snug">
                   {hackathon.event}
+                  {hackathon.link && (
+                    <ArrowRightIcon className="h-4 w-4 -translate-x-1 text-zinc-300 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
+                  )}
                 </h3>
                 <p className="text-xs leading-relaxed text-zinc-400 line-clamp-2">
                   {hackathon.summary}
