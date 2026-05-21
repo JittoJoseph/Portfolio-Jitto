@@ -20,7 +20,7 @@ export default function Hackathons({ recognitions }: HackathonsProps) {
         {recognitions.map((hackathon) => (
           <article
             key={hackathon._id}
-            className={`relative rounded-2xl border border-zinc-800 bg-zinc-950 p-4${
+            className={`relative rounded-2xl border border-zinc-800 bg-zinc-950 p-3${
               hackathon.link ? " group cursor-pointer" : ""
             }`}
           >
