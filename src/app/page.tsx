@@ -144,7 +144,7 @@ export default async function Home() {
             </div>
           </section>
 
-          <Hackathons />
+          <Hackathons recognitions={data.recognitions} />
 
           <section className="mb-20 text-center">
             <Link

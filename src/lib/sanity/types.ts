@@ -50,10 +50,21 @@ export type ExperienceData = {
   orderRank: number;
 };
 
+export type RecognitionData = {
+  _id: string;
+  event: string;
+  award: string;
+  context: string;
+  summary: string;
+  image: string;
+  orderRank: number;
+};
+
 export type PortfolioData = {
   profile: ProfileData;
   socials: SocialsData;
   projects: ProjectData[];
   career: ExperienceData[];
   education: ExperienceData[];
+  recognitions: RecognitionData[];
 };

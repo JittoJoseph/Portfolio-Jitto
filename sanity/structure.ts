@@ -11,7 +11,7 @@ export const structure: StructureResolver = (S) =>
           S.document()
             .schemaType("profile")
             .documentId("profile-main")
-            .views([S.view.form()])
+            .views([S.view.form()]),
         ),
       S.listItem()
         .title("Social Links")
@@ -20,7 +20,7 @@ export const structure: StructureResolver = (S) =>
           S.document()
             .schemaType("socials")
             .documentId("socials-main")
-            .views([S.view.form()])
+            .views([S.view.form()]),
         ),
       S.divider(),
       S.listItem()
@@ -31,4 +31,8 @@ export const structure: StructureResolver = (S) =>
         .title("Experience")
         .schemaType("experience")
         .child(S.documentTypeList("experience").title("Experience")),
+      S.listItem()
+        .title("Recognition")
+        .schemaType("recognition")
+        .child(S.documentTypeList("recognition").title("Recognition")),
     ]);

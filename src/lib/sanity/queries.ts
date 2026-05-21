@@ -7,6 +7,7 @@ import type {
   ProfileData,
   ProjectData,
   SocialsData,
+  RecognitionData,
 } from "./types";
 
 export const PORTFOLIO_REVALIDATE_SECONDS = 3600;
@@ -58,6 +59,16 @@ type RawExperience = {
   orderRank?: number;
 };
 
+type RawRecognition = {
+  _id: string;
+  event?: string;
+  award?: string;
+  context?: string;
+  summary?: string;
+  image?: string;
+  orderRank?: number;
+};
+
 const profileQuery = `*[_type == "profile" && _id == "profile-main"][0]{
   fullName,
   birthDate,
@@ -104,8 +115,25 @@ const experienceQuery = `*[_type == "experience"]|order(orderRank asc){
   orderRank
 }`;
 
+const recognitionQuery = `*[_type == "recognition"]|order(orderRank asc){
+  _id,
+  event,
+  award,
+  context,
+  summary,
+  "image": image.asset->url,
+  orderRank
+}`;
+
 function normalizeProfile(raw?: RawProfile | null): ProfileData | null {
-  if (!raw || !raw.fullName || !raw.birthDate || !raw.tagline || !raw.bio || !raw.headshotUrl) {
+  if (
+    !raw ||
+    !raw.fullName ||
+    !raw.birthDate ||
+    !raw.tagline ||
+    !raw.bio ||
+    !raw.headshotUrl
+  ) {
     return null;
   }
 
@@ -170,34 +198,59 @@ function normalizeExperience(raw: RawExperience[] = []): ExperienceData[] {
     }));
 }
 
+function normalizeRecognitions(raw: RawRecognition[] = []): RecognitionData[] {
+  return raw
+    .filter(
+      (item) =>
+        item.event && item.award && item.context && item.summary && item.image,
+    )
+    .map((item, index) => ({
+      _id: item._id,
+      event: item.event as string,
+      award: item.award as string,
+      context: item.context as string,
+      summary: item.summary as string,
+      image: item.image as string,
+      orderRank: item.orderRank ?? index,
+    }));
+}
+
 async function fetchPortfolioData(): Promise<PortfolioData> {
   const client = getSanityClient();
 
   if (!client) {
     throw new Error(
-      "Sanity client is not configured. Set NEXT_PUBLIC_SANITY_PROJECT_ID and NEXT_PUBLIC_SANITY_DATASET."
+      "Sanity client is not configured. Set NEXT_PUBLIC_SANITY_PROJECT_ID and NEXT_PUBLIC_SANITY_DATASET.",
     );
   }
 
-  const [rawProfile, rawSocials, rawProjects, rawExperience] = await Promise.all([
-    client.fetch<RawProfile | null>(profileQuery),
-    client.fetch<RawSocials | null>(socialsQuery),
-    client.fetch<RawProject[]>(projectsQuery),
-    client.fetch<RawExperience[]>(experienceQuery),
-  ]);
+  const [rawProfile, rawSocials, rawProjects, rawExperience, rawRecognitions] =
+    await Promise.all([
+      client.fetch<RawProfile | null>(profileQuery),
+      client.fetch<RawSocials | null>(socialsQuery),
+      client.fetch<RawProject[]>(projectsQuery),
+      client.fetch<RawExperience[]>(experienceQuery),
+      client.fetch<RawRecognition[]>(recognitionQuery),
+    ]);
 
   const profile = normalizeProfile(rawProfile);
   const socials = normalizeSocials(rawSocials);
   const projects = normalizeProjects(rawProjects);
   const experience = normalizeExperience(rawExperience);
+  const recognitions = normalizeRecognitions(rawRecognitions);
 
-  if (!profile || !socials || projects.length === 0 || experience.length === 0) {
+  if (
+    !profile ||
+    !socials ||
+    projects.length === 0 ||
+    experience.length === 0
+  ) {
     throw new Error(
       `Sanity content missing required docs: profile=${Boolean(
-        profile
+        profile,
       )} socials=${Boolean(socials)} projects=${projects.length} experience=${
         experience.length
-      }`
+      }`,
     );
   }
 
@@ -206,7 +259,7 @@ async function fetchPortfolioData(): Promise<PortfolioData> {
 
   if (career.length === 0 || education.length === 0) {
     throw new Error(
-      `Sanity experience missing required kinds: career=${career.length} education=${education.length}`
+      `Sanity experience missing required kinds: career=${career.length} education=${education.length}`,
     );
   }
 
@@ -216,6 +269,7 @@ async function fetchPortfolioData(): Promise<PortfolioData> {
     projects,
     career,
     education,
+    recognitions,
   };
 }
 
@@ -225,7 +279,7 @@ export const getPortfolioData = unstable_cache(
   {
     revalidate: PORTFOLIO_REVALIDATE_SECONDS,
     tags: [SANITY_PORTFOLIO_TAG],
-  }
+  },
 );
 
 export async function hasPortfolioContent(): Promise<boolean> {
@@ -235,13 +289,21 @@ export async function hasPortfolioContent(): Promise<boolean> {
     return false;
   }
 
-  const [profileCount, socialsCount, projectsCount, experienceCount] =
-    await Promise.all([
-      client.fetch<number>('count(*[_type == "profile" && _id == "profile-main"])'),
-      client.fetch<number>('count(*[_type == "socials" && _id == "socials-main"])'),
-      client.fetch<number>('count(*[_type == "project"])'),
-      client.fetch<number>('count(*[_type == "experience"])'),
-    ]);
+  const [
+    profileCount,
+    socialsCount,
+    projectsCount,
+    experienceCount,
+  ] = await Promise.all([
+    client.fetch<number>(
+      'count(*[_type == "profile" && _id == "profile-main"])',
+    ),
+    client.fetch<number>(
+      'count(*[_type == "socials" && _id == "socials-main"])',
+    ),
+    client.fetch<number>('count(*[_type == "project"])'),
+    client.fetch<number>('count(*[_type == "experience"])'),
+  ]);
 
   return (
     profileCount > 0 &&
