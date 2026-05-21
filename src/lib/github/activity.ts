@@ -68,6 +68,8 @@ function buildWeeks(days: ContributionDay[]): ContributionWeek[] {
 function buildMonthLabels(weeks: ContributionWeek[]): MonthLabel[] {
   const labels: MonthLabel[] = [];
   let previousMonthKey = "";
+  const minimumWeekGap = 4;
+  let lastLabelWeekIndex = -minimumWeekGap;
 
   for (let weekIndex = 0; weekIndex < weeks.length; weekIndex += 1) {
     const firstDayInWeek = weeks[weekIndex].find((day) => day !== null);
@@ -83,11 +85,16 @@ function buildMonthLabels(weeks: ContributionWeek[]): MonthLabel[] {
       continue;
     }
 
+    if (weekIndex - lastLabelWeekIndex < minimumWeekGap) {
+      continue;
+    }
+
     labels.push({
       label: date.toLocaleString("en-US", { month: "short", timeZone: "UTC" }),
       weekIndex,
     });
     previousMonthKey = monthKey;
+    lastLabelWeekIndex = weekIndex;
   }
 
   return labels;

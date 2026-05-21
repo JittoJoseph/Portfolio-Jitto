@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { getGitHubContributionActivity } from "@/lib/github/activity";
 
-const weekdayLabels = ["", "Mon", "", "Wed", "", "Fri", ""];
 const levelClasses = [
   "bg-[#161b22]",
   "bg-[#0e4429]",
@@ -51,40 +50,21 @@ export default async function GitHubActivity({
       className="block overflow-hidden rounded-xl py-1"
     >
       <div className="github-activity-scroll overflow-x-auto pb-2">
-        <div className="min-w-max" style={activityStyle}>
-          <div
-            className="mb-2 grid pl-8 text-[10px] leading-none text-zinc-500 sm:text-[11px]"
-            style={{
-              ...graphStyle,
-              columnGap: "var(--activity-gap)",
-            }}
-          >
-            {activity.monthLabels.map((month) => (
-              <span
-                key={`${month.label}-${month.weekIndex}`}
-                style={{ gridColumnStart: month.weekIndex + 1 }}
-              >
-                {month.label}
-              </span>
-            ))}
-          </div>
-
-          <div className="flex gap-2">
+        <div className="w-full flex justify-center">
+          <div className="min-w-max px-2" style={activityStyle}>
             <div
-              className="grid w-6 text-[10px] text-zinc-500 sm:text-[11px]"
-              style={
-                {
-                  gridTemplateRows: "repeat(7, var(--activity-cell))",
-                  rowGap: "var(--activity-gap)",
-                } as CSSProperties
-              }
+              className="mb-2 grid text-[10px] leading-none text-zinc-500 sm:text-[11px]"
+              style={{
+                ...graphStyle,
+                columnGap: "var(--activity-gap)",
+              }}
             >
-              {weekdayLabels.map((label, index) => (
+              {activity.monthLabels.map((month) => (
                 <span
-                  key={`${label}-${index}`}
-                  className="flex items-center leading-none"
+                  key={`${month.label}-${month.weekIndex}`}
+                  style={{ gridColumnStart: month.weekIndex + 1 }}
                 >
-                  {label}
+                  {month.label}
                 </span>
               ))}
             </div>
