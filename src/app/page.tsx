@@ -13,6 +13,8 @@ import ProjectCard from "@/components/ProjectCard";
 import Footer from "@/components/Footer";
 import GitHubActivity from "@/components/GitHubActivity";
 import PixelCompanion from "@/components/PixelCompanion";
+import FloatingDock from "@/components/FloatingDock";
+import Hackathons from "@/components/Hackathons";
 import SocialLink from "@/components/SocialLink";
 import { calculateAge } from "@/lib/utils";
 import { getPortfolioData } from "@/lib/sanity/queries";
@@ -110,7 +112,7 @@ export default async function Home() {
           )}
 
           {/* Projects Section */}
-          <section className="mb-20">
+          <section id="projects" className="mb-20 scroll-mt-24">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-semibold text-zinc-100">
                 Featured Projects
@@ -142,6 +144,8 @@ export default async function Home() {
             </div>
           </section>
 
+          <Hackathons />
+
           <section className="mb-20 text-center">
             <Link
               href={"https://www.linkedin.com/in/jittojoseph17/"}
@@ -169,6 +173,7 @@ export default async function Home() {
           <Footer socials={data.socials} />
         </div>
       </main>
+      <FloatingDock />
       {data.profile.enablePixelCompanion && <PixelCompanion />}
     </>
   );
