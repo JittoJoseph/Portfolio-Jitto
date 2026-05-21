@@ -57,6 +57,7 @@ export type RecognitionData = {
   context: string;
   summary: string;
   image: string;
+  link?: string | null;
   orderRank: number;
 };
 

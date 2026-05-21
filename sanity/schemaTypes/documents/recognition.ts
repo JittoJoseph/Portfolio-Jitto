@@ -33,6 +33,13 @@ export const recognitionType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "link",
+      title: "Link",
+      type: "url",
+      description: "Optional. If set, the card links to this URL.",
+      validation: (rule) => rule.uri({ scheme: ["http", "https"] }),
+    }),
+    defineField({
       name: "image",
       title: "Recognition image",
       type: "image",

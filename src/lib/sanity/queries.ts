@@ -66,6 +66,7 @@ type RawRecognition = {
   context?: string;
   summary?: string;
   image?: string;
+  link?: string;
   orderRank?: number;
 };
 
@@ -121,6 +122,7 @@ const recognitionQuery = `*[_type == "recognition"]|order(orderRank asc){
   award,
   context,
   summary,
+  link,
   "image": image.asset->url,
   orderRank
 }`;
@@ -211,6 +213,7 @@ function normalizeRecognitions(raw: RawRecognition[] = []): RecognitionData[] {
       context: item.context as string,
       summary: item.summary as string,
       image: item.image as string,
+      link: item.link ?? null,
       orderRank: item.orderRank ?? index,
     }));
 }
