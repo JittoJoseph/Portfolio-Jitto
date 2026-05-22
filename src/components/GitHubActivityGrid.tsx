@@ -26,11 +26,10 @@ export default function GitHubActivityGrid({
   activity: GitHubContributionActivity;
 }) {
   const [tooltip, setTooltip] = useState<TooltipState | null>(null);
-  const [mounted, setMounted] = useState(false);
   const rafIdRef = useRef<number | null>(null);
+  const portalRoot = typeof document === "undefined" ? null : document.body;
 
   useEffect(() => {
-    setMounted(true);
     return () => {
       if (rafIdRef.current !== null) {
         cancelAnimationFrame(rafIdRef.current);
@@ -157,7 +156,7 @@ export default function GitHubActivityGrid({
         </div>
       </div>
 
-      {mounted &&
+      {portalRoot &&
         tooltip &&
         createPortal(
           <div
@@ -167,7 +166,7 @@ export default function GitHubActivityGrid({
           >
             {tooltip.text}
           </div>,
-          document.body,
+          portalRoot,
         )}
     </>
   );

@@ -5,17 +5,16 @@ import {
   LinkedInIcon,
   MailIcon,
   FileTextIcon,
-  ArrowRightIcon,
   XIcon,
 } from "@/components/Icons";
 import ExperienceTabs from "@/components/ExperienceTabs";
-import ProjectCard from "@/components/ProjectCard";
 import Footer from "@/components/Footer";
 import GitHubActivity from "@/components/GitHubActivity";
 import PixelCompanion from "@/components/PixelCompanion";
 import FloatingDock from "@/components/FloatingDock";
 import Hackathons from "@/components/Hackathons";
 import SocialLink from "@/components/SocialLink";
+import AE86Showcase from "@/components/AE86Showcase";
 import { getGitHubContributionActivity } from "@/lib/github/activity";
 import { calculateAge } from "@/lib/utils";
 import { getPortfolioData } from "@/lib/sanity/queries";
@@ -153,38 +152,7 @@ export default async function Home() {
             </section>
           )}
 
-          {/* Projects Section */}
-          <section id="projects" className="mb-20 scroll-mt-24">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold text-zinc-100">
-                Featured Projects
-              </h2>
-              <Link
-                href="/projects"
-                className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors flex items-center gap-1"
-              >
-                View All
-                <ArrowRightIcon className="h-4 w-4" />
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {personalProjects
-                .filter((project) => project.featured)
-                .slice(0, 4)
-                .map((project, index) => (
-                  <ProjectCard key={index} project={project} />
-                ))}
-            </div>
-            <div className="mt-8 flex justify-center">
-              <Link
-                href="/projects"
-                className="group inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/40 px-4 py-2 text-sm font-medium text-zinc-300 transition-colors hover:border-zinc-700 hover:bg-zinc-900 hover:text-zinc-100"
-              >
-                View all projects
-                <ArrowRightIcon className="h-4 w-4 text-zinc-500 transition-transform group-hover:translate-x-0.5 group-hover:text-zinc-300" />
-              </Link>
-            </div>
-          </section>
+          <AE86Showcase projects={personalProjects} />
 
           <Hackathons recognitions={data.recognitions} />
 
