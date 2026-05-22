@@ -38,9 +38,6 @@ function Model({ path }: { path: string }) {
     instance.traverse((child) => {
       if (!(child instanceof Mesh)) return;
 
-      child.castShadow = true;
-      child.receiveShadow = true;
-
       const materials = Array.isArray(child.material)
         ? child.material
         : [child.material];
@@ -99,12 +96,8 @@ function Scene({
 
       {/* Primary key light */}
       <directionalLight
-        castShadow
         intensity={2.4}
         position={[-3.5, 5, 4.5]}
-        shadow-mapSize={[1024, 1024]}
-        shadow-radius={6}
-        shadow-bias={-0.0001}
       />
 
       {/* Fill light */}
@@ -153,7 +146,6 @@ export default function Projects3DScene({ isVisible }: { isVisible: boolean }) {
 
   return (
     <Canvas
-      shadows
       dpr={[1, 1.5]}
       frameloop={isVisible ? "always" : "demand"}
       camera={{

@@ -101,7 +101,7 @@ export default function ProjectsSection({
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {featuredProjects.map((project, index) => (
-            <ProjectCard key={index} project={project} />
+            <ProjectCard key={index} project={project} priority={index === 0} />
           ))}
         </div>
       </div>

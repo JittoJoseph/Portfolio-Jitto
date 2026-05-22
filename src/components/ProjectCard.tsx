@@ -11,9 +11,11 @@ import type { ProjectData } from "@/lib/sanity/types";
 export default function ProjectCard({
   project,
   badge,
+  priority = false,
 }: {
   project: ProjectData;
   badge?: string;
+  priority?: boolean;
 }) {
   return (
     <div className="group rounded-2xl border border-zinc-800/80 bg-zinc-900/50 p-3 hover:border-zinc-700 hover:bg-zinc-900/70 transition-all duration-200">
@@ -24,6 +26,7 @@ export default function ProjectCard({
             alt={project.title}
             fill
             sizes="(min-width: 640px) 50vw, 100vw"
+            priority={priority}
             className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-500"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
