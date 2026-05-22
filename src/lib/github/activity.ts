@@ -3,6 +3,7 @@ type ContributionLevel = 0 | 1 | 2 | 3 | 4;
 type ContributionDay = {
   date: string;
   level: ContributionLevel;
+  count: number;
 };
 
 type ContributionWeek = Array<ContributionDay | null>;
@@ -21,6 +22,17 @@ export type GitHubContributionActivity = {
 const DAYS_IN_WEEK = 7;
 
 const toIsoDate = (date: Date) => date.toISOString().slice(0, 10);
+
+function parseContributionCount(text: string): number {
+  const trimmed = text.trim();
+
+  if (trimmed.toLowerCase().startsWith("no ")) {
+    return 0;
+  }
+
+  const match = trimmed.match(/^(\d+)\s+contribution/);
+  return match ? Number.parseInt(match[1], 10) : 0;
+}
 
 function parseGitHubUsername(profileUrl: string): string | null {
   const match = profileUrl.match(
@@ -129,15 +141,41 @@ export async function getGitHubContributionActivity(
 
     const html = await response.text();
 
-    const cellRegex =
-      /<td(?=[^>]*\bdata-date="([^"]+)")(?=[^>]*\bdata-level="([0-4])")[^>]*>/g;
+    const tooltipRegex =
+      /<tool-tip[^>]*\bfor="([^"]+)"[^>]*>([^<]*)<\/tool-tip>/g;
+    const countsById = new Map<string, number>();
+    let tooltipMatch: RegExpExecArray | null = tooltipRegex.exec(html);
+
+    while (tooltipMatch) {
+      const [, id, text] = tooltipMatch;
+      countsById.set(id, parseContributionCount(text));
+      tooltipMatch = tooltipRegex.exec(html);
+    }
+
+    const cellRegex = /<td[^>]*\bdata-date="[^"]+"[^>]*>/g;
     const days: ContributionDay[] = [];
     let cellMatch: RegExpExecArray | null = cellRegex.exec(html);
 
     while (cellMatch) {
-      const [, date, levelValue] = cellMatch;
-      const level = Number.parseInt(levelValue, 10) as ContributionLevel;
-      days.push({ date, level });
+      const cell = cellMatch[0];
+      const dateMatch = cell.match(/\bdata-date="([^"]+)"/);
+      const levelMatch = cell.match(/\bdata-level="([0-4])"/);
+
+      if (!dateMatch || !levelMatch) {
+        cellMatch = cellRegex.exec(html);
+        continue;
+      }
+
+      const countMatch = cell.match(/\bdata-count="([0-9]+)"/);
+      const idMatch = cell.match(/\bid="([^"]+)"/);
+      const level = Number.parseInt(levelMatch[1], 10) as ContributionLevel;
+      const count = countMatch
+        ? Number.parseInt(countMatch[1], 10)
+        : idMatch
+          ? (countsById.get(idMatch[1]) ?? 0)
+          : 0;
+
+      days.push({ date: dateMatch[1], level, count });
       cellMatch = cellRegex.exec(html);
     }
 
