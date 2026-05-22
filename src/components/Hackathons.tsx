@@ -41,6 +41,7 @@ export default function Hackathons({ recognitions }: HackathonsProps) {
                 src={hackathon.image}
                 alt={hackathon.event}
                 fill
+                sizes="(min-width: 640px) 9rem, 7rem"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
             </div>
