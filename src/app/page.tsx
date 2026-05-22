@@ -124,7 +124,7 @@ export default async function Home() {
           </section>
 
           {data.profile.showCodeActivity && (
-            <section className="mb-16">
+            <section>
               <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
                 <h2 className="text-xl font-semibold text-zinc-100">
                   Code Activity
