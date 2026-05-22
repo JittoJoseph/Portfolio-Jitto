@@ -187,29 +187,8 @@ export default function AE86Showcase({
       ref={ref}
       className="mb-16 mt-8 scroll-mt-24 md:mt-6"
     >
-      {/*
-       * Hero row — text + car side by side.
-       * overflow-visible on the wrapper lets the atmospheric glow
-       * and canvas bleed softly outside the max-w-2xl boundary.
-       */}
       <div className="relative overflow-visible">
-        {/*
-         * Full-bleed atmospheric backdrop — sits behind everything,
-         * centered on the car (right side). Overflows the container
-         * naturally with no visible edge.
-         */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 -z-10"
-          style={{
-            // Fade outer edge to the exact page background color — no harsh transparency edge
-            background:
-              "radial-gradient(ellipse 80% 80% at 50% 50%, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.005) 40%, #09090b 70%)",
-          }}
-        />
-
         <div className="flex flex-col-reverse gap-4 md:grid md:grid-cols-[1fr_1.15fr] md:gap-0 md:items-center">
-          {/* ── Left: heading / description / CTA ── */}
           <div className="flex flex-col items-center gap-4 text-center md:items-start md:text-left">
             <h2 className="text-2xl font-semibold text-zinc-100">Projects</h2>
             <p className="max-w-[260px] text-sm leading-relaxed text-zinc-400 md:max-w-[220px]">
@@ -223,8 +202,6 @@ export default function AE86Showcase({
               <ArrowRightIcon className="h-4 w-4 text-zinc-500 transition-transform group-hover:translate-x-1 group-hover:text-zinc-300" />
             </Link>
           </div>
-
-          {/* ── Right: AE86 canvas ── */}
           <div className="relative overflow-visible">
             {/* Canvas */}
             <div className="relative h-[280px] sm:h-[320px] md:h-[240px] lg:h-[280px]">
@@ -233,7 +210,6 @@ export default function AE86Showcase({
                 dpr={[1, 1.5]}
                 frameloop={isVisible ? "always" : "demand"}
                 camera={{
-                  // Tighter FOV + closer → car fills the frame
                   position: [3.8, 2.1, 4.8],
                   fov: 32,
                   near: 0.1,
@@ -252,16 +228,10 @@ export default function AE86Showcase({
               </Canvas>
             </div>
 
-            {/*
-             * Ground-reflection glow — feathered ellipse sits
-             * beneath the car, fades completely to transparent.
-             */}
             <div
               aria-hidden
               className="pointer-events-none absolute bottom-0 left-1/2 h-14 w-4/5 -translate-x-1/2"
               style={{
-                // Fade to the actual page background — never to 'transparent'
-                // which the browser renders as transparent-black, not the bg color
                 background:
                   "radial-gradient(ellipse at 50% 10%, rgba(180,180,195,0.06) 0%, #09090b 70%)",
                 filter: "blur(8px)",
@@ -271,19 +241,11 @@ export default function AE86Showcase({
         </div>
       </div>
 
-      {/* ── Featured projects ── */}
       <div className="mt-12 md:mt-2">
         <div className="mb-3 flex items-center justify-between">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-zinc-500">
             Featured projects
           </p>
-          <Link
-            href="/projects"
-            className="group inline-flex items-center gap-1.5 text-xs font-medium text-zinc-400 transition-colors hover:text-zinc-200"
-          >
-            View all projects
-            <ArrowRightIcon className="h-3.5 w-3.5 text-zinc-500 transition-transform group-hover:translate-x-0.5 group-hover:text-zinc-300" />
-          </Link>
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
