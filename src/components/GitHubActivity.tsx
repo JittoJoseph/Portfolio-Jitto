@@ -1,14 +1,14 @@
 import Link from "next/link";
-import { getGitHubContributionActivity } from "@/lib/github/activity";
+import type { GitHubContributionActivity } from "@/lib/github/activity";
 import GitHubActivityGrid from "@/components/GitHubActivityGrid";
 
 export default async function GitHubActivity({
   githubProfileUrl,
+  activity,
 }: {
   githubProfileUrl: string;
+  activity: GitHubContributionActivity | null;
 }) {
-  const activity = await getGitHubContributionActivity(githubProfileUrl);
-
   if (!activity) {
     return (
       <Link
@@ -24,8 +24,6 @@ export default async function GitHubActivity({
     );
   }
 
-  const cellSize = 9;
-  const gapSize = 2;
   return (
     <Link
       href={activity.profileUrl}

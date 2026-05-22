@@ -16,6 +16,7 @@ import PixelCompanion from "@/components/PixelCompanion";
 import FloatingDock from "@/components/FloatingDock";
 import Hackathons from "@/components/Hackathons";
 import SocialLink from "@/components/SocialLink";
+import { getGitHubContributionActivity } from "@/lib/github/activity";
 import { calculateAge } from "@/lib/utils";
 import { getPortfolioData } from "@/lib/sanity/queries";
 
@@ -28,6 +29,23 @@ export default async function Home() {
   const personalProjects = data.projects.filter(
     (project) => project.kind === "personal",
   );
+  const githubActivity = data.profile.showCodeActivity
+    ? await getGitHubContributionActivity(data.socials.github)
+    : null;
+  const contributionTotal = githubActivity
+    ? githubActivity.weeks.reduce((total, week) => {
+        for (const day of week) {
+          if (day) {
+            total += day.count;
+          }
+        }
+        return total;
+      }, 0)
+    : null;
+  const contributionTotalText =
+    contributionTotal !== null
+      ? contributionTotal.toLocaleString("en-US")
+      : null;
 
   return (
     <>
@@ -108,11 +126,29 @@ export default async function Home() {
 
           {data.profile.showCodeActivity && (
             <section className="mb-16">
-              <h2 className="text-xl font-semibold text-zinc-100 mb-4">
-                Code Activity
-              </h2>
+              <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+                <h2 className="text-xl font-semibold text-zinc-100">
+                  Code Activity
+                </h2>
+                {contributionTotalText ? (
+                  <span className="text-sm text-zinc-400">
+                    <span className="font-semibold tabular-nums text-zinc-200">
+                      {contributionTotalText}
+                    </span>{" "}
+                    contribution{contributionTotal === 1 ? "" : "s"} in the last
+                    year
+                  </span>
+                ) : (
+                  <span className="text-sm text-zinc-400">
+                    GitHub activity unavailable
+                  </span>
+                )}
+              </div>
               <div className="rounded-2xl border border-zinc-800 bg-zinc-950 p-3">
-                <GitHubActivity githubProfileUrl={data.socials.github} />
+                <GitHubActivity
+                  githubProfileUrl={data.socials.github}
+                  activity={githubActivity}
+                />
               </div>
             </section>
           )}
