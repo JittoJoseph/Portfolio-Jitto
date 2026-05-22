@@ -14,7 +14,7 @@ import PixelCompanion from "@/components/PixelCompanion";
 import FloatingDock from "@/components/FloatingDock";
 import Hackathons from "@/components/Hackathons";
 import SocialLink from "@/components/SocialLink";
-import AE86Showcase from "@/components/AE86Showcase";
+import ProjectsSection from "@/components/ProjectsSection";
 import { getGitHubContributionActivity } from "@/lib/github/activity";
 import { calculateAge } from "@/lib/utils";
 import { getPortfolioData } from "@/lib/sanity/queries";
@@ -152,7 +152,7 @@ export default async function Home() {
             </section>
           )}
 
-          <AE86Showcase projects={personalProjects} />
+          <ProjectsSection projects={personalProjects} />
 
           <Hackathons recognitions={data.recognitions} />
 
