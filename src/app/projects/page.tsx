@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowLeftIcon, LinkedInIcon } from "@/components/Icons";
+import FloatingDock from "@/components/FloatingDock";
 import PixelCompanion from "@/components/PixelCompanion";
 import ProjectCard from "@/components/ProjectCard";
 import type { Metadata } from "next";
@@ -142,6 +143,7 @@ export default async function ProjectsPage() {
         </div>
         </div>
       </main>
+      <FloatingDock />
       {data.profile.enablePixelCompanion && <PixelCompanion />}
     </>
   );
