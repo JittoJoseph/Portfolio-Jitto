@@ -217,10 +217,10 @@ export default function AE86Showcase({
             </p>
             <Link
               href="/projects"
-              className="inline-flex w-fit items-center gap-2 rounded-full border border-zinc-700/70 bg-zinc-900/50 px-5 py-2.5 text-sm font-medium text-zinc-200 transition-colors hover:border-zinc-600 hover:bg-zinc-900 hover:text-zinc-100"
+              className="group inline-flex w-fit items-center gap-2 rounded-full border border-zinc-700/70 bg-zinc-900/50 px-5 py-2.5 text-sm font-medium text-zinc-200 transition-colors hover:border-zinc-600 hover:bg-zinc-900 hover:text-zinc-100"
             >
               Explore all projects
-              <ArrowRightIcon className="h-4 w-4 text-zinc-500" />
+              <ArrowRightIcon className="h-4 w-4 text-zinc-500 transition-transform group-hover:translate-x-1 group-hover:text-zinc-300" />
             </Link>
           </div>
 
