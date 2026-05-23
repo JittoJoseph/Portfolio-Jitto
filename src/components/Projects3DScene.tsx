@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
@@ -18,12 +18,12 @@ function fitModelToStage(model: Object3D) {
   const bounds = new Box3().setFromObject(model);
   const size = bounds.getSize(new Vector3());
   const center = bounds.getCenter(new Vector3());
-  const scale = 3.8 / Math.max(size.x, size.y, size.z);
+  const scale = 2.6 / Math.max(size.x, size.y, size.z);
 
   model.scale.setScalar(scale);
   model.position.set(
     -center.x * scale,
-    -bounds.min.y * scale,
+    -center.y * scale,
     -center.z * scale,
   );
 }
@@ -88,13 +88,7 @@ function SmoothOrbitControls() {
   return null;
 }
 
-function Scene({
-  isActive,
-  modelPath,
-}: {
-  isActive: boolean;
-  modelPath: string;
-}) {
+function Scene({ isActive }: { isActive: boolean }) {
   const rig = useRef<Group>(null);
 
   useFrame((_, delta) => {
@@ -133,9 +127,9 @@ function Scene({
         color="#a1a1aa"
       />
 
-      <group ref={rig} position={[0, -0.4, 0]}>
+      <group ref={rig} position={[0, 0, 0]}>
         <Suspense fallback={null}>
-          <Model path={modelPath} />
+          <Model path="/models/earth.glb" />
         </Suspense>
       </group>
 
@@ -145,19 +139,6 @@ function Scene({
 }
 
 export default function Projects3DScene({ isVisible }: { isVisible: boolean }) {
-  const [modelPath, setModelPath] = useState<string | null>(null);
-
-  useEffect(() => {
-    const MODELS = [
-      "/models/AE86.glb",
-      "/models/toyota_ae86.glb",
-      "/models/satellite.glb",
-    ];
-    setModelPath(MODELS[Math.floor(Math.random() * MODELS.length)]);
-  }, []);
-
-  if (!modelPath) return null;
-
   return (
     <Canvas
       dpr={[1, 1.5]}
@@ -175,7 +156,7 @@ export default function Projects3DScene({ isVisible }: { isVisible: boolean }) {
       }}
       style={{ overflow: "visible" }}
     >
-      <Scene isActive={isVisible} modelPath={modelPath} />
+      <Scene isActive={isVisible} />
     </Canvas>
   );
 }
