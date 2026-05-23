@@ -84,7 +84,7 @@ export default function ProjectsSection({
               className="pointer-events-none absolute bottom-0 left-1/2 h-14 w-4/5 -translate-x-1/2"
               style={{
                 background:
-                  "radial-gradient(ellipse at 50% 10%, rgba(180,180,195,0.06) 0%, #09090b 70%)",
+                  "radial-gradient(ellipse at 50% 10%, rgba(180,180,195,0.08) 0%, #09090b 70%)",
                 filter: "blur(8px)",
               }}
             />
