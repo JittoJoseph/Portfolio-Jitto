@@ -69,6 +69,20 @@ function SmoothOrbitControls() {
     return instance;
   }, [camera, gl.domElement]);
 
+  // OrbitControls captures touch pointers, which suppresses browser scroll
+  // even with touch-action: pan-y. Release capture so the browser can scroll.
+  useEffect(() => {
+    const el = gl.domElement;
+    el.style.touchAction = "pan-y";
+    const handler = (e: PointerEvent) => {
+      if (e.pointerType === "touch") {
+        try { el.releasePointerCapture(e.pointerId); } catch {}
+      }
+    };
+    el.addEventListener("pointerdown", handler);
+    return () => el.removeEventListener("pointerdown", handler);
+  }, [gl.domElement]);
+
   useEffect(() => () => controls.dispose(), [controls]);
   useFrame(() => controls.update());
   return null;
@@ -159,7 +173,7 @@ export default function Projects3DScene({ isVisible }: { isVisible: boolean }) {
         antialias: true,
         powerPreference: "high-performance",
       }}
-      style={{ overflow: "visible", touchAction: "pan-y" }}
+      style={{ overflow: "visible" }}
     >
       <Scene isActive={isVisible} modelPath={modelPath} />
     </Canvas>

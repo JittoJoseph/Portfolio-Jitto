@@ -67,3 +67,8 @@ body {
 .github-activity-scroll::-webkit-scrollbar-thumb:hover {
   background-color: #3f3f46;
 }
+
+/* Let vertical swipes scroll the page over the 3D scene on touch devices */
+#projects canvas {
+  touch-action: pan-y !important;
+}
