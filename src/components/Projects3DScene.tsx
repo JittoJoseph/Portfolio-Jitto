@@ -63,8 +63,8 @@ function SmoothOrbitControls() {
     instance.enableDamping = true;
     instance.enablePan = false;
     instance.enableZoom = false;
-    instance.minPolarAngle = Math.PI / 3.6;
-    instance.maxPolarAngle = Math.PI / 2.15;
+    instance.minPolarAngle = Math.PI / 2.5;
+    instance.maxPolarAngle = Math.PI / 2.5;
     instance.rotateSpeed = 0.45;
     return instance;
   }, [camera, gl.domElement]);
@@ -159,7 +159,7 @@ export default function Projects3DScene({ isVisible }: { isVisible: boolean }) {
         antialias: true,
         powerPreference: "high-performance",
       }}
-      style={{ overflow: "visible" }}
+      style={{ overflow: "visible", touchAction: "pan-y" }}
     >
       <Scene isActive={isVisible} modelPath={modelPath} />
     </Canvas>
