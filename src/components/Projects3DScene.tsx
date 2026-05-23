@@ -99,33 +99,15 @@ function Scene({ isActive }: { isActive: boolean }) {
   return (
     <>
       {/* Base ambient */}
-      <ambientLight intensity={0.9} />
+
       <hemisphereLight args={["#e4e4e7", "#18181b", 1.2]} />
 
       {/* Primary key light */}
       <directionalLight
-        intensity={2.4}
+        intensity={1.8}
         position={[-3.5, 5, 4.5]}
       />
 
-      {/* Fill light */}
-      <spotLight
-        intensity={3.2}
-        position={[4, 4, 3]}
-        angle={0.45}
-        penumbra={0.7}
-        decay={1.4}
-      />
-
-      {/* Rim light */}
-      <spotLight
-        intensity={0.8}
-        position={[-2, 3, -4]}
-        angle={0.5}
-        penumbra={1}
-        decay={2}
-        color="#a1a1aa"
-      />
 
       <group ref={rig} position={[0, 0, 0]}>
         <Suspense fallback={null}>
