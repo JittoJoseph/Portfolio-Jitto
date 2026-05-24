@@ -113,7 +113,8 @@ export default function GitHubActivityGrid({
             >
               {week.map((day, dayIndex) => {
                 const key = day ? day.date : `empty-${weekIndex}-${dayIndex}`;
-                const tooltipText = day
+                const hasContributions = !!day && day.count > 0;
+                const tooltipText = hasContributions
                   ? `${day.count} contribution${day.count !== 1 ? "s" : ""}`
                   : "";
 
@@ -122,7 +123,7 @@ export default function GitHubActivityGrid({
                     key={key}
                     className="block"
                     onMouseEnter={(event) => {
-                      if (day) {
+                      if (hasContributions) {
                         scheduleTooltip(
                           tooltipText,
                           event.clientX,
@@ -131,7 +132,7 @@ export default function GitHubActivityGrid({
                       }
                     }}
                     onMouseMove={(event) => {
-                      if (day) {
+                      if (hasContributions) {
                         scheduleTooltip(
                           tooltipText,
                           event.clientX,
