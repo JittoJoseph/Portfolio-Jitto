@@ -20,17 +20,29 @@ export const metadata: Metadata = {
     "React Projects",
     "Portfolio Projects",
   ],
+  alternates: {
+    canonical: "/projects",
+  },
   openGraph: {
     title: "Projects | Jitto Joseph",
     description: "Explore my software development projects and contributions.",
     url: "https://www.jittojoseph.xyz/projects",
     siteName: "Jitto Joseph Portfolio",
     type: "website",
+    images: [
+      {
+        url: "/icons/android-chrome-512x512.png",
+        width: 512,
+        height: 512,
+        alt: "Jitto Joseph Portfolio",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Projects | Jitto Joseph",
     description: "Explore my software development projects and contributions.",
+    images: ["/icons/android-chrome-512x512.png"],
   },
 };
 

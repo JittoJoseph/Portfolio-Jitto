@@ -39,11 +39,21 @@ export const metadata: Metadata = {
     siteName: "Jitto Joseph Portfolio",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/icons/android-chrome-512x512.png",
+        width: 512,
+        height: 512,
+        alt: "Jitto Joseph Portfolio",
+      },
+    ],
   },
   twitter: {
+    card: "summary",
     title: "Jitto Joseph | Software Engineer Portfolio",
     description:
       "Software Engineer with a passion for building scalable, user-centric applications.",
+    images: ["/icons/android-chrome-512x512.png"],
   },
   robots: {
     index: true,
@@ -67,9 +77,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = {
-    "@context": "https://schema.org",
+  const personId = "https://www.jittojoseph.xyz/#person";
+  const person = {
     "@type": "Person",
+    "@id": personId,
     name: "Jitto Joseph",
     jobTitle: "Software Engineer",
     description:
@@ -90,6 +101,24 @@ export default function RootLayout({
       "Next.js",
       "TypeScript",
       "Full Stack Development",
+    ],
+  };
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      person,
+      {
+        "@type": "WebSite",
+        name: "Jitto Joseph Portfolio",
+        url: "https://www.jittojoseph.xyz",
+        description:
+          "Portfolio site showcasing software engineering experience, projects, and contact details.",
+        publisher: {
+          "@id": personId,
+        },
+        inLanguage: "en",
+      },
     ],
   };
 
