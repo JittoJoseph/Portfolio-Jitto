@@ -25,7 +25,7 @@ ${formatLink(
 )}
 ${formatLink(
   "Projects (Markdown)",
-  "https://www.jittojoseph.xyz/projects/index.html.md",
+  "https://www.jittojoseph.xyz/projects.md",
   "Personal/open-source and freelance projects with descriptions, tech, and links.",
 )}
 
