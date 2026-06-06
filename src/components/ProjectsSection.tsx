@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { ArrowRightIcon } from "@/components/Icons";
+import { ArrowRightIcon, RocketIcon } from "@/components/Icons";
 import ProjectCard from "@/components/ProjectCard";
 import type { ProjectData } from "@/lib/sanity/types";
 
@@ -65,13 +65,25 @@ export default function ProjectsSection({
             <p className="max-w-[260px] text-sm leading-relaxed text-zinc-400 md:max-w-[220px]">
               A collection of things I&apos;ve built and shipped.
             </p>
-            <Link
-              href="/projects"
-              className="group inline-flex w-fit items-center gap-2 rounded-full border border-zinc-700/70 bg-zinc-900/50 px-5 py-2.5 text-sm font-medium text-zinc-200 transition-colors hover:border-zinc-600 hover:bg-zinc-900 hover:text-zinc-100"
-            >
-              Explore all projects
-              <ArrowRightIcon className="h-4 w-4 text-zinc-500 transition-transform group-hover:translate-x-1 group-hover:text-zinc-300" />
-            </Link>
+            <div className="flex flex-col items-center gap-4 md:items-start mt-2">
+              <Link
+                href="/projects"
+                className="group inline-flex w-fit items-center gap-2 rounded-full border border-zinc-700/70 bg-zinc-900/50 px-5 py-2.5 text-sm font-medium text-zinc-200 transition-colors hover:border-zinc-600 hover:bg-zinc-900 hover:text-zinc-100"
+              >
+                Explore all projects
+                <ArrowRightIcon className="h-4 w-4 text-zinc-500 transition-transform group-hover:translate-x-1 group-hover:text-zinc-300" />
+              </Link>
+              <Link
+                href="/space"
+                className="group inline-flex w-fit items-center gap-2 rounded-full border border-zinc-800/80 bg-zinc-950/50 ms-2 px-3 py-1.5 backdrop-blur-md transition-all hover:border-zinc-700 hover:bg-zinc-900/80"
+                aria-label="Launch into Space easter egg"
+              >
+                <RocketIcon className="h-3.5 w-3.5 text-zinc-500 transition-colors group-hover:text-zinc-300" />
+                <span className="text-xs font-medium tracking-wide text-zinc-500 transition-colors group-hover:text-zinc-300">
+                  Launch into space
+                </span>
+              </Link>
+            </div>
           </div>
           <div className="relative overflow-visible">
             {/* Canvas */}
