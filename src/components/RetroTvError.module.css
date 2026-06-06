@@ -398,15 +398,6 @@
   margin-top: -0.15em;
   z-index: -1;
 }
-.base3 {
-  position: absolute;
-  height: 0.15em;
-  width: 17.5em;
-  background-color: #171717;
-  margin-top: 0.8em;
-}
-
-
 
 @media (max-width: 275px), (max-height: 520px) {
   .main {

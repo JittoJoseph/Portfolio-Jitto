@@ -76,7 +76,6 @@ const RetroTvError = React.forwardRef<HTMLDivElement, RetroTvErrorProps>(
           <div className={styles.bottom}>
             <div className={styles.base1}></div>
             <div className={styles.base2}></div>
-            <div className={styles.base3}></div>
           </div>
         </div>
       </div>
