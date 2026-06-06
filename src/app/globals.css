@@ -72,3 +72,44 @@ body {
 #projects canvas {
   touch-action: pan-y !important;
 }
+/* Individual star dot */
+.star-dot {
+  position: absolute;
+  border-radius: 50%;
+  background-color: #ffffff;
+  animation-name: star-twinkle;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* Gentle twinkle */
+@keyframes star-twinkle {
+  0%   { opacity: 0.1; }
+  100% { opacity: 0.9; }
+}
+
+/* Drift all stars together toward the upper-left */
+.star-field-drift {
+  animation: star-drift 90s linear infinite;
+}
+
+@keyframes star-drift {
+  0%   { transform: translate(0, 0); }
+  100% { transform: translate(-8%, -5%); }
+}
+
+/* ── Among Us ejection animation ─────────────────────────────────────────── */
+
+@keyframes imposter-drift {
+  0%   { transform: translate(10vw, 80vh);  opacity: 0; }
+  5%   { transform: translate(13.75vw, 76.5vh); opacity: 1; }
+  90%  { transform: translate(77.5vw, 13.5vh); opacity: 1; }
+  95%  { transform: translate(81.25vw, 11.75vh); opacity: 0; }
+  100% { transform: translate(85vw, 10vh); opacity: 0; }
+}
+
+@keyframes imposter-tumble {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

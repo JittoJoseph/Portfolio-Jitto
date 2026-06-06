@@ -1,5 +1,7 @@
 import Link from "next/link";
 import RetroTvError from "@/components/RetroTvError";
+import FloatingImposter from "@/components/FloatingImposter";
+import StarField from "@/components/StarField";
 import { ArrowRightIcon } from "@/components/Icons";
 import { Metadata } from "next";
 
@@ -10,12 +12,16 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen bg-zinc-950 text-zinc-200 selection:bg-zinc-800 selection:text-zinc-100 font-sans flex flex-col items-center justify-center p-4 sm:p-6 overflow-hidden">
-      <div className="mx-auto max-w-2xl flex flex-col items-center justify-center gap-2 sm:gap-4 relative z-10 text-center w-full">
-        
-        {/* Top: Retro TV */}
+    <main className="relative min-h-screen bg-zinc-950 text-zinc-200 selection:bg-zinc-800 selection:text-zinc-100 font-sans flex flex-col items-center justify-center p-4 sm:p-6 overflow-hidden">
+      <StarField />
+
+      <FloatingImposter />
+
+      {/* Page content — sits above stars */}
+      <div className="relative z-10 mx-auto max-w-2xl flex flex-col items-center justify-center gap-2 sm:gap-4 text-center w-full">
+
         <div className="relative flex items-center justify-center pointer-events-none sm:pointer-events-auto">
-           <RetroTvError className="transform-gpu scale-95 sm:scale-90 lg:scale-[0.85] xl:scale-75" />
+          <RetroTvError className="transform-gpu scale-80 sm:scale-80 lg:scale-[0.85] xl:scale-75" />
         </div>
 
         <div className="space-y-2 mt-4 sm:mt-6">
@@ -26,7 +32,7 @@ export default function NotFound() {
             Sorry, we couldn&apos;t find the page you&apos;re looking for. The coordinates might be missing.
           </p>
         </div>
-        
+
         <div className="pt-4 z-20">
           <Link
             href="/"
@@ -40,3 +46,4 @@ export default function NotFound() {
     </main>
   );
 }
+
