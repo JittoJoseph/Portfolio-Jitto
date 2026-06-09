@@ -41,7 +41,6 @@ type RawProject = {
   links?: LinkItem[];
   featured?: boolean;
   kind?: "personal" | "freelance";
-  orderRank?: number;
 };
 
 type RawExperience = {
@@ -56,7 +55,6 @@ type RawExperience = {
   image?: string;
   bullets?: string[];
   links?: LinkItem[];
-  orderRank?: number;
 };
 
 type RawRecognition = {
@@ -67,7 +65,6 @@ type RawRecognition = {
   summary?: string;
   image?: string;
   link?: string;
-  orderRank?: number;
 };
 
 const profileQuery = `*[_type == "profile" && _id == "profile-main"][0]{
@@ -97,8 +94,7 @@ const projectsQuery = `*[_type == "project"]|order(orderRank asc){
   tech,
   links,
   featured,
-  kind,
-  orderRank
+  kind
 }`;
 
 const experienceQuery = `*[_type == "experience"]|order(orderRank asc){
@@ -112,8 +108,7 @@ const experienceQuery = `*[_type == "experience"]|order(orderRank asc){
   location,
   "image": image.asset->url,
   bullets,
-  links,
-  orderRank
+  links
 }`;
 
 const recognitionQuery = `*[_type == "recognition"]|order(orderRank asc){
@@ -123,8 +118,7 @@ const recognitionQuery = `*[_type == "recognition"]|order(orderRank asc){
   context,
   summary,
   link,
-  "image": image.asset->url,
-  orderRank
+  "image": image.asset->url
 }`;
 
 function normalizeProfile(raw?: RawProfile | null): ProfileData | null {
@@ -177,7 +171,6 @@ function normalizeProjects(raw: RawProject[] = []): ProjectData[] {
       links: item.links ?? [],
       featured: item.featured ?? false,
       kind: item.kind as "personal" | "freelance",
-      orderRank: item.orderRank ?? index,
     }));
 }
 
@@ -195,8 +188,7 @@ function normalizeExperience(raw: RawExperience[] = []): ExperienceData[] {
       location: item.location,
       image: item.image,
       bullets: item.bullets ?? [],
-      links: item.links ?? [],
-      orderRank: item.orderRank ?? index,
+      links: item.links ?? []
     }));
 }
 
@@ -213,8 +205,7 @@ function normalizeRecognitions(raw: RawRecognition[] = []): RecognitionData[] {
       context: item.context as string,
       summary: item.summary as string,
       image: item.image as string,
-      link: item.link ?? null,
-      orderRank: item.orderRank ?? index,
+      link: item.link ?? null
     }));
 }
 

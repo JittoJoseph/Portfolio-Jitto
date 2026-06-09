@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
+import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 
 export const experienceType = defineType({
   name: "experience",
@@ -72,21 +73,9 @@ export const experienceType = defineType({
       type: "array",
       of: [defineArrayMember({ type: "link" })],
     }),
-    defineField({
-      name: "orderRank",
-      title: "Sort order",
-      type: "number",
-      validation: (rule) => rule.required().integer().min(0),
-      initialValue: 0,
-    }),
+    orderRankField({ type: "experience" }),
   ],
-  orderings: [
-    {
-      title: "Sort order",
-      name: "orderRank",
-      by: [{ field: "orderRank", direction: "asc" }],
-    },
-  ],
+  orderings: [orderRankOrdering],
   preview: {
     select: {
       company: "company",

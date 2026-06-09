@@ -32,7 +32,6 @@ export type ProjectData = {
   links: LinkItem[];
   featured?: boolean;
   kind: "personal" | "freelance";
-  orderRank: number;
 };
 
 export type ExperienceData = {
@@ -47,7 +46,6 @@ export type ExperienceData = {
   image?: string | null;
   bullets: string[];
   links: LinkItem[];
-  orderRank: number;
 };
 
 export type RecognitionData = {
@@ -58,7 +56,6 @@ export type RecognitionData = {
   summary: string;
   image: string;
   link?: string | null;
-  orderRank: number;
 };
 
 export type PortfolioData = {
