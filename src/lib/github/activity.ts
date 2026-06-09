@@ -109,7 +109,13 @@ function buildMonthLabels(weeks: ContributionWeek[]): MonthLabel[] {
     lastLabelWeekIndex = weekIndex;
   }
 
-  return labels;
+  // Remove duplicate month labels, keeping only the last occurrence
+  return labels.filter((label, index, array) => {
+    return !array.some(
+      (otherLabel, otherIndex) =>
+        otherIndex > index && otherLabel.label === label.label,
+    );
+  });
 }
 
 export async function getGitHubContributionActivity(
