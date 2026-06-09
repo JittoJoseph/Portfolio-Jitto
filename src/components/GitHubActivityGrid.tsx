@@ -85,14 +85,28 @@ export default function GitHubActivityGrid({
             columnGap: "var(--activity-gap)",
           }}
         >
-          {activity.monthLabels.map((month) => (
-            <span
-              key={`${month.label}-${month.weekIndex}`}
-              style={{ gridColumnStart: month.weekIndex + 1 }}
-            >
-              {month.label}
-            </span>
-          ))}
+          {activity.monthLabels.map((month, index) => {
+            const isLast = index === activity.monthLabels.length - 1;
+            return (
+              <span
+                key={`${month.label}-${month.weekIndex}`}
+                style={{
+                  gridColumnStart: month.weekIndex + 1,
+                  position: isLast ? "relative" : undefined,
+                }}
+              >
+                <span
+                  style={
+                    isLast
+                      ? { position: "absolute", right: 0, whiteSpace: "nowrap" }
+                      : undefined
+                  }
+                >
+                  {month.label}
+                </span>
+              </span>
+            );
+          })}
         </div>
 
         <div
