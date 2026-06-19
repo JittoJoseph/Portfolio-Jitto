@@ -159,13 +159,13 @@ export default async function Home() {
 
           <ProjectsSection projects={personalProjects} />
 
-          <Hackathons recognitions={data.recognitions} />
-
           {latestCommits.length > 0 && (
             <section className="mb-20">
               <LatestCommits commits={latestCommits} />
             </section>
           )}
+
+          <Hackathons recognitions={data.recognitions} />
 
           <section className="mb-20 text-center">
             <Link
