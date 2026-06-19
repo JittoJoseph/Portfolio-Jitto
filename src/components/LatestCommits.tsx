@@ -13,7 +13,7 @@ export default function LatestCommits({ commits }: LatestCommitsProps) {
     <div className="rounded-xl border border-zinc-800/60 bg-[#0c0c0e] p-5 font-mono">
       <div className="mb-5 flex items-center justify-between">
         <h3 className="text-xs font-medium uppercase tracking-wider text-zinc-500">
-          Latest Commits
+          Development Feed
         </h3>
       </div>
 
