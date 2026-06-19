@@ -73,7 +73,7 @@ export default async function Home() {
               <div className="flex flex-wrap gap-4 pt-4">
                 {/* Resume Button */}
                 <Link
-                  href={data.socials.resumeUrl}
+                  href={"/resume.pdf"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 rounded-md bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-200"
