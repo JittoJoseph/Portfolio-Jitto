@@ -15,11 +15,13 @@ import FloatingDock from "@/components/FloatingDock";
 import Hackathons from "@/components/Hackathons";
 import SocialLink from "@/components/SocialLink";
 import ProjectsSection from "@/components/ProjectsSection";
+import LatestCommits from "@/components/LatestCommits";
 import { getGitHubContributionActivity } from "@/lib/github/activity";
+import { getLatestCommits } from "@/lib/github/commits";
 import { calculateAge } from "@/lib/utils";
 import { getPortfolioData } from "@/lib/sanity/queries";
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export default async function Home() {
   const data = await getPortfolioData();
@@ -31,6 +33,9 @@ export default async function Home() {
   const githubActivity = data.profile.showCodeActivity
     ? await getGitHubContributionActivity(data.socials.github)
     : null;
+  const latestCommits = data.profile.showCodeActivity
+    ? await getLatestCommits(data.socials.github)
+    : [];
   const contributionTotal = githubActivity
     ? githubActivity.weeks.reduce((total, week) => {
         for (const day of week) {
@@ -155,6 +160,12 @@ export default async function Home() {
           <ProjectsSection projects={personalProjects} />
 
           <Hackathons recognitions={data.recognitions} />
+
+          {latestCommits.length > 0 && (
+            <section className="mb-20">
+              <LatestCommits commits={latestCommits} />
+            </section>
+          )}
 
           <section className="mb-20 text-center">
             <Link
