@@ -34,7 +34,7 @@ function parseContributionCount(text: string): number {
   return match ? Number.parseInt(match[1], 10) : 0;
 }
 
-function parseGitHubUsername(profileUrl: string): string | null {
+export function parseGitHubUsername(profileUrl: string): string | null {
   const match = profileUrl.match(
     /^https?:\/\/(?:www\.)?github\.com\/([^/?#]+)/i,
   );
@@ -129,7 +129,7 @@ export async function getGitHubContributionActivity(
           "User-Agent": "portfolio-website",
         },
         next: {
-          revalidate: 3600,
+          revalidate: 60,
           tags: [`github-activity:${username}`],
         },
       },
