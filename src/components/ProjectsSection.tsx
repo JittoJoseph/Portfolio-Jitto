@@ -73,16 +73,7 @@ export default function ProjectsSection({
                 Explore all projects
                 <ArrowRightIcon className="h-4 w-4 text-zinc-500 transition-transform group-hover:translate-x-1 group-hover:text-zinc-300" />
               </Link>
-              <Link
-                href="/space"
-                className="group inline-flex w-fit items-center gap-2 rounded-full border border-zinc-800/80 bg-zinc-950/50 ms-2 px-3 py-1.5 backdrop-blur-md transition-all hover:border-zinc-700 hover:bg-zinc-900/80"
-                aria-label="Launch into Space easter egg"
-              >
-                <RocketIcon className="h-3.5 w-3.5 text-zinc-500 transition-colors group-hover:text-zinc-300" />
-                <span className="text-xs font-medium tracking-wide text-zinc-500 transition-colors group-hover:text-zinc-300">
-                  Launch into space
-                </span>
-              </Link>
+
             </div>
           </div>
           <div className="relative overflow-visible">
