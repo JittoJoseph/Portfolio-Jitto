@@ -101,7 +101,7 @@ export default async function ProjectsPage() {
           <p className="text-xs text-zinc-600 mb-6">
             Side projects and open source contributions
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10">
             {projectsData.map((project, index) => (
               <ProjectCard key={index} project={project} />
             ))}
@@ -116,7 +116,7 @@ export default async function ProjectsPage() {
           <p className="text-xs text-zinc-600 mb-6">
             Projects built for clients and businesses
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10">
             {freelanceData.map((project, index) => (
               <ProjectCard key={index} project={project} badge="Client" />
             ))}

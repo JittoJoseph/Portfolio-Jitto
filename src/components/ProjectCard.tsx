@@ -20,7 +20,7 @@ export default function ProjectCard({
   const firstLink = project.links?.[0];
 
   return (
-    <div className="group relative rounded-2xl border border-zinc-800/80 bg-zinc-900/50 p-3 hover:border-zinc-700 hover:bg-zinc-900/70 transition-colors duration-200">
+    <div className="group relative">
       {firstLink && (
         <Link
           href={firstLink.href}
@@ -49,7 +49,7 @@ export default function ProjectCard({
           )}
         </div>
       )}
-      <div className="px-1">
+      <div className="flex flex-col">
         <h3 className="mb-1.5 text-[15px] font-semibold leading-snug tracking-tight text-white">
           {project.title}
         </h3>
@@ -66,7 +66,7 @@ export default function ProjectCard({
             </span>
           ))}
         </div>
-        <div className="relative z-20 flex items-center gap-3 border-t border-zinc-800/60 pt-2">
+        <div className="relative z-20 flex items-center gap-3 pt-2">
           {project.links.map((link, i) => (
             <Link
               key={i}
