@@ -27,7 +27,7 @@ export default function ExperienceTabs({
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`flex-1 rounded-xl py-2.5 text-sm font-medium transition-all ${
+            className={`flex-1 rounded-xl py-2.5 text-sm font-medium transition-all cursor-pointer ${
               activeTab === tab
                 ? "bg-zinc-800/60 text-zinc-300"
                 : "text-zinc-600 hover:text-zinc-400"
