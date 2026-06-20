@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./PixelCompanion.module.css";
 
 type Direction = "right" | "up" | "left" | "down";
-type Mode = "idle" | "run";
+type Mode = "idle" | "run" | "phone";
 
 const FRAME_WIDTH = 16;
 const FRAME_HEIGHT = 32;
@@ -592,6 +592,7 @@ export default function PixelCompanion() {
   const idleSettleAtRef = useRef<number | null>(null);
   const entranceTargetRef = useRef<Point | null>(null);
   const pauseUntilRef = useRef(0);
+  const playingPhoneAnimUntilRef = useRef(0);
   const bobHoveredRef = useRef(false);
   const restingRef = useRef(false);
   const wasMovingRef = useRef(false);
@@ -700,16 +701,17 @@ export default function PixelCompanion() {
       setTarget(getSectionPoint());
     };
 
-    const updateSprite = (time: number, moving: boolean, direction: Direction) => {
-      const mode: Mode = moving ? "run" : "idle";
-      const interval = moving ? 115 : restingRef.current ? 360 : 230;
+    const updateSprite = (time: number, moving: boolean, direction: Direction, forcedMode?: Mode) => {
+      const mode: Mode = forcedMode || (moving ? "run" : "idle");
+      const interval = mode === "phone" ? 160 : moving ? 115 : restingRef.current ? 360 : 230;
+      const framesCount = mode === "phone" ? 17 : FRAMES_PER_DIRECTION;
 
       if (time - lastSpriteTickRef.current < interval) {
         return;
       }
 
       lastSpriteTickRef.current = time;
-      frameRef.current = (frameRef.current + 1) % FRAMES_PER_DIRECTION;
+      frameRef.current = (frameRef.current + 1) % framesCount;
       const shouldSettleForward = !moving &&
         idleSettleAtRef.current !== null &&
         time >= idleSettleAtRef.current;
@@ -771,7 +773,13 @@ export default function PixelCompanion() {
       const nextWaypoint = pathRef.current[0];
 
       if (bobHoveredRef.current) {
-        updateSprite(time, false, "down");
+        updateSprite(time, false, "down", "idle");
+        animationFrameRef.current = requestAnimationFrame(loop);
+        return;
+      }
+
+      if (time < playingPhoneAnimUntilRef.current) {
+        updateSprite(time, false, "down", "phone");
         animationFrameRef.current = requestAnimationFrame(loop);
         return;
       }
@@ -864,7 +872,12 @@ export default function PixelCompanion() {
         pointer.y <= bounds.bottom;
 
       if (!inside) {
-        bobHoveredRef.current = false;
+        if (bobHoveredRef.current) {
+          bobHoveredRef.current = false;
+          playingPhoneAnimUntilRef.current = performance.now() + (17 * 160);
+          frameRef.current = -1; // -1 because updateSprite immediately increments it
+          lastSpriteTickRef.current = 0;
+        }
         return;
       }
 
@@ -873,6 +886,7 @@ export default function PixelCompanion() {
       }
 
       bobHoveredRef.current = true;
+      playingPhoneAnimUntilRef.current = 0;
       idleSettleAtRef.current = null;
       directionRef.current = "down";
       readableDirectionRef.current = "down";
@@ -980,7 +994,11 @@ export default function PixelCompanion() {
     };
   }, []);
 
-  const frameIndex = DIRECTION_OFFSET[sprite.direction] + sprite.frame;
+  let displayFrame = sprite.frame;
+  if (sprite.mode === "phone") {
+    displayFrame = sprite.frame < 9 ? sprite.frame : 16 - sprite.frame;
+  }
+  const frameIndex = sprite.mode === "phone" ? displayFrame : DIRECTION_OFFSET[sprite.direction] + sprite.frame;
 
   return (
     <div
@@ -1017,6 +1035,16 @@ export default function PixelCompanion() {
             styles.sheet,
             styles.runSheet,
             sprite.mode === "run" ? styles.activeSheet : "",
+          ].join(" ")}
+          style={{
+            backgroundPosition: `-${frameIndex * FRAME_WIDTH}px 0px`,
+          }}
+        />
+        <div
+          className={[
+            styles.sheet,
+            styles.phoneSheet,
+            sprite.mode === "phone" ? styles.activeSheet : "",
           ].join(" ")}
           style={{
             backgroundPosition: `-${frameIndex * FRAME_WIDTH}px 0px`,

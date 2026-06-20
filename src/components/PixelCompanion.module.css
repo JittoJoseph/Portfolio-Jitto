@@ -55,6 +55,11 @@
   background-image: url("/framesets/Bob_run_16x16.png");
 }
 
+.phoneSheet {
+  background-image: url("/framesets/Bob_phone_16x16.png");
+  background-size: 144px 32px;
+}
+
 .activeSheet {
   opacity: 1;
 }
