@@ -5,6 +5,7 @@ import {
   GlobeIcon,
   LinkIcon,
   LinkedInIcon,
+  NotionIcon,
 } from "@/components/Icons";
 import type { ProjectData } from "@/lib/sanity/types";
 
@@ -81,6 +82,8 @@ export default function ProjectCard({
                 <GlobeIcon className="h-3.5 w-3.5" />
               ) : link.icon === "linkedin" ? (
                 <LinkedInIcon className="h-3.5 w-3.5" />
+              ) : link.icon === "notion" ? (
+                <NotionIcon className="h-3.5 w-3.5" />
               ) : (
                 <LinkIcon className="h-3.5 w-3.5" />
               )}

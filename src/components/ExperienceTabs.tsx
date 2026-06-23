@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRightIcon, GlobeIcon, LinkIcon, LinkedInIcon } from "./Icons";
+import { ArrowRightIcon, GlobeIcon, LinkIcon, LinkedInIcon, NotionIcon } from "./Icons";
 import type { ExperienceData } from "@/lib/sanity/types";
 
 export default function ExperienceTabs({
@@ -129,6 +129,8 @@ export default function ExperienceTabs({
                         <GlobeIcon className="h-3 w-3" />
                       ) : link.icon === "linkedin" ? (
                         <LinkedInIcon className="h-3 w-3" />
+                      ) : link.icon === "notion" ? (
+                        <NotionIcon className="h-3 w-3" />
                       ) : (
                         <LinkIcon className="h-3 w-3" />
                       )}

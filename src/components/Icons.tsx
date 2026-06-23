@@ -184,3 +184,18 @@ export function RocketIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function NotionIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      {...props}
+    >
+      <path d="M4.136 3.014L23.019 1.15l.394 1.171c-.551.157-1.023.275-1.023.865v15.206c0 .59.63.787 1.023.865l-.393 1.181-8.544 1.496-.315-1.18c.551-.158.945-.237.945-.867V8.572l-8.937 11.22H5.081l-3.346-1.103-.315-1.181c.512-.118.866-.354.866-.945V4.747c0-.59-.393-.826-.866-.945l.315-1.181l8.504 1.496.315 1.181c-.551.157-.945.315-.945.905v10.158l8.346-10.433v-1.614c0-.59-.472-.787-1.023-.866z"/>
+    </svg>
+  );
+}

@@ -31,6 +31,7 @@ export const linkObject = defineType({
           { title: "Globe", value: "globe" },
           { title: "LinkedIn", value: "linkedin" },
           { title: "Link", value: "link" },
+          { title: "Notion", value: "notion" },
         ],
       },
     }),
