@@ -86,7 +86,7 @@ const socialsQuery = `*[_type == "socials" && _id == "socials-main"][0]{
   "resumeUrl": resumeFile.asset->url
 }`;
 
-const projectsQuery = `*[_type == "project"]|order(orderRank asc){
+const projectsQuery = `*[_type == "project" && isHidden != true]|order(orderRank asc){
   _id,
   title,
   description,
@@ -97,7 +97,7 @@ const projectsQuery = `*[_type == "project"]|order(orderRank asc){
   kind
 }`;
 
-const experienceQuery = `*[_type == "experience"]|order(orderRank asc){
+const experienceQuery = `*[_type == "experience" && isHidden != true]|order(orderRank asc){
   _id,
   kind,
   company,
@@ -111,7 +111,7 @@ const experienceQuery = `*[_type == "experience"]|order(orderRank asc){
   links
 }`;
 
-const recognitionQuery = `*[_type == "recognition"]|order(orderRank asc){
+const recognitionQuery = `*[_type == "recognition" && isHidden != true]|order(orderRank asc){
   _id,
   event,
   award,
@@ -295,8 +295,8 @@ export async function hasPortfolioContent(): Promise<boolean> {
     client.fetch<number>(
       'count(*[_type == "socials" && _id == "socials-main"])',
     ),
-    client.fetch<number>('count(*[_type == "project"])'),
-    client.fetch<number>('count(*[_type == "experience"])'),
+    client.fetch<number>('count(*[_type == "project" && isHidden != true])'),
+    client.fetch<number>('count(*[_type == "experience" && isHidden != true])'),
   ]);
 
   return (

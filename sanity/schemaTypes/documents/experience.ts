@@ -73,6 +73,13 @@ export const experienceType = defineType({
       type: "array",
       of: [defineArrayMember({ type: "link" })],
     }),
+    defineField({
+      name: "isHidden",
+      title: "Hide this experience",
+      description: "Toggle this on to hide this experience from the live website.",
+      type: "boolean",
+      initialValue: false,
+    }),
     orderRankField({ type: "experience" }),
   ],
   orderings: [orderRankOrdering],

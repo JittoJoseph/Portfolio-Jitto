@@ -47,6 +47,13 @@ export const recognitionType = defineType({
       options: { hotspot: true },
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: "isHidden",
+      title: "Hide this recognition",
+      description: "Toggle this on to hide this recognition from the live website.",
+      type: "boolean",
+      initialValue: false,
+    }),
     orderRankField({ type: "recognition" }),
   ],
   preview: {

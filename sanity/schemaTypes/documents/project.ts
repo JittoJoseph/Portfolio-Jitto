@@ -66,6 +66,13 @@ export const projectType = defineType({
       type: "boolean",
       initialValue: false,
     }),
+    defineField({
+      name: "isHidden",
+      title: "Hide this project",
+      description: "Toggle this on to hide this project from the live website.",
+      type: "boolean",
+      initialValue: false,
+    }),
     orderRankField({ type: "project" }),
   ],
   preview: {
