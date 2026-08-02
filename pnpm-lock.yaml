@@ -26,6 +26,9 @@ importers:
       '@sanity/orderable-document-list':
         specifier: ^2.0.18
         version: 2.0.18(@emotion/is-prop-valid@1.4.0)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sanity@6.8.0(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.1)(vite@8.2.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0)))(@sanity/sdk@2.18.0(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1)(use-sync-external-store@1.6.0(react@19.2.8))(xstate@5.32.5))(@types/node@26.1.2)(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(babel-plugin-react-compiler@1.0.0)(esbuild@0.28.1)(jiti@2.7.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(rolldown@1.2.1)(styled-components@6.4.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(supports-color@8.1.1)(typescript@6.0.3))(styled-components@6.4.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
+      '@sanity/ui':
+        specifier: 3.2.0
+        version: 3.2.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.8(react@19.2.8))(react-is@19.2.8)(react@19.2.8)(styled-components@6.4.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
       '@sanity/vision':
         specifier: ^6.8.0
         version: 6.8.0(98c16f095cdaf877c7e84b0493840f38)
@@ -2516,6 +2519,15 @@ packages:
     resolution: {integrity: sha512-VvhWNrupGjXxytz/tRbjOHeEHctUsZqf7AF+eT1MxP0pgOdhtRlXsroV6e4Uayoux/cbbuYTX5JpCnW6cAuZYw==}
     peerDependencies:
       '@types/react': '*'
+
+  '@sanity/ui@3.2.0':
+    resolution: {integrity: sha512-bWi2zz8ixZcGHh1YXsgliHRaA9Vw11V5lkJN6SGZcuvbrwPFm6j71Cc3jL1l2MQ11I0HmUYmQ5E76+cT4SznYA==}
+    engines: {node: '>=20.19 <22 || >=22.12'}
+    peerDependencies:
+      react: ^18 || >=19.0.0-0
+      react-dom: ^18 || >=19.0.0-0
+      react-is: ^18 || >=19.0.0-0
+      styled-components: ^5.2 || ^6
 
   '@sanity/ui@3.5.1':
     resolution: {integrity: sha512-lssD6rU4q3JD/HI5Sqqwd8gLLOsH+aIAfmTLiT8WeL2BKKL6GYmzzq0JGMyZStKXbrUpI53qI5UghwHOp9IFGQ==}
@@ -9028,6 +9040,24 @@ snapshots:
       '@sanity/client': 7.26.0
       '@sanity/media-library-types': 1.6.0
       '@types/react': 19.2.18
+
+  '@sanity/ui@3.2.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.8(react@19.2.8))(react-is@19.2.8)(react@19.2.8)(styled-components@6.4.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8))':
+    dependencies:
+      '@floating-ui/react-dom': 2.1.9(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@juggle/resize-observer': 3.4.0
+      '@sanity/color': 3.0.8
+      '@sanity/icons': 3.8.0(react@19.2.8)
+      csstype: 3.2.3
+      motion: 12.43.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react: 19.2.8
+      react-compiler-runtime: 1.0.0(react@19.2.8)
+      react-dom: 19.2.8(react@19.2.8)
+      react-is: 19.2.8
+      react-refractor: 4.0.0(react@19.2.8)
+      styled-components: 6.4.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      use-effect-event: 2.0.3(react@19.2.8)
+    transitivePeerDependencies:
+      - '@emotion/is-prop-valid'
 
   '@sanity/ui@3.5.1(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(styled-components@6.4.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8))':
     dependencies:

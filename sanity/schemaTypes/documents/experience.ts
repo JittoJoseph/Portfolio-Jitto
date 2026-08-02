@@ -50,8 +50,7 @@ export const experienceType = defineType({
     defineField({
       name: "period",
       title: "Period",
-      description:
-        "Month and year are both optional - use year only where that reads better, for example education.",
+      description: "Month is optional - year only is fine.",
       type: "experiencePeriod",
     }),
     defineField({
