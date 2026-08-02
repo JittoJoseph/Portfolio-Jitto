@@ -48,7 +48,7 @@ export async function GET() {
 
   for (const item of data.career) {
     const title = [item.role, item.company].filter(Boolean).join(" — ");
-    const details = [item.period, item.location].filter(Boolean).join(" | ");
+    const details = [item.period, item.duration, item.location].filter(Boolean).join(" | ");
     lines.push(`- ${title}${details ? ` (${details})` : ""}`);
     for (const bullet of item.bullets) {
       lines.push(`  - ${bullet}`);
@@ -63,7 +63,7 @@ export async function GET() {
 
   for (const item of data.education) {
     const title = [item.degree, item.institution].filter(Boolean).join(" — ");
-    const details = [item.period, item.location].filter(Boolean).join(" | ");
+    const details = [item.period, item.duration, item.location].filter(Boolean).join(" | ");
     lines.push(`- ${title}${details ? ` (${details})` : ""}`);
     for (const bullet of item.bullets) {
       lines.push(`  - ${bullet}`);

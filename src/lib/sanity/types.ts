@@ -41,7 +41,8 @@ export type ExperienceData = {
   institution?: string;
   role?: string;
   degree?: string;
-  period: string;
+  period?: string;
+  duration?: string;
   location?: string;
   image?: string | null;
   bullets: string[];

@@ -4,6 +4,7 @@ import { projectType } from "./documents/project";
 import { experienceType } from "./documents/experience";
 import { recognitionType } from "./documents/recognition";
 import { linkObject } from "./objects/link";
+import { experiencePeriodObject } from "./objects/experiencePeriod";
 
 export const schemaTypes = [
   profileType,
@@ -12,4 +13,5 @@ export const schemaTypes = [
   experienceType,
   recognitionType,
   linkObject,
+  experiencePeriodObject,
 ];

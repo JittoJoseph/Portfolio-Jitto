@@ -1,5 +1,9 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
-import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
+import {
+  orderRankField,
+  orderRankOrdering,
+} from "@sanity/orderable-document-list";
+import { describePeriod } from "../objects/experiencePeriod";
 
 export const experienceType = defineType({
   name: "experience",
@@ -46,13 +50,15 @@ export const experienceType = defineType({
     defineField({
       name: "period",
       title: "Period",
-      type: "string",
-      validation: (rule) => rule.required(),
+      description:
+        "Month and year are both optional - use year only where that reads better, for example education.",
+      type: "experiencePeriod",
     }),
     defineField({
       name: "location",
       title: "Location",
-      description: "Optional free-form location, for example Remote, California, United States, or Bengaluru - Hybrid.",
+      description:
+        "Optional free-form location, for example Remote, California, United States, or Bengaluru - Hybrid.",
       type: "string",
     }),
     defineField({
@@ -76,7 +82,8 @@ export const experienceType = defineType({
     defineField({
       name: "isHidden",
       title: "Hide this experience",
-      description: "Toggle this on to hide this experience from the live website.",
+      description:
+        "Toggle this on to hide this experience from the live website.",
       type: "boolean",
       initialValue: false,
     }),
@@ -95,7 +102,11 @@ export const experienceType = defineType({
     prepare(selection) {
       return {
         title: selection.company || selection.institution || "Experience item",
-        subtitle: [selection.kind, selection.period, selection.location]
+        subtitle: [
+          selection.kind,
+          describePeriod(selection.period),
+          selection.location,
+        ]
           .filter(Boolean)
           .join(" | "),
         media: selection.media,

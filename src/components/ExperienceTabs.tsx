@@ -72,9 +72,17 @@ export default function ExperienceTabs({
                     </p>
                   </div>
                   <div className="shrink-0 text-left sm:max-w-[14rem] sm:text-right">
-                    <p className="text-[13px] font-medium leading-5 text-zinc-300">
-                      {item.period}
-                    </p>
+                    {item.period && (
+                      <p className="text-[13px] font-medium leading-5 text-zinc-300">
+                        {item.period}
+                        {item.duration && (
+                          <span className="font-normal text-zinc-500">
+                            {" · "}
+                            {item.duration}
+                          </span>
+                        )}
+                      </p>
+                    )}
                     {location && (
                       <p className="mt-0.5 text-[13px] font-normal leading-5 text-zinc-500 sm:ml-auto">
                         {location}

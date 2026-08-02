@@ -1,5 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { getSanityClient } from "./client";
+import { formatPeriod, type ExperiencePeriod } from "../experiencePeriod";
 import type {
   ExperienceData,
   LinkItem,
@@ -50,7 +51,7 @@ type RawExperience = {
   institution?: string;
   role?: string;
   degree?: string;
-  period?: string;
+  period?: ExperiencePeriod;
   location?: string;
   image?: string;
   bullets?: string[];
@@ -176,20 +177,25 @@ function normalizeProjects(raw: RawProject[] = []): ProjectData[] {
 
 function normalizeExperience(raw: RawExperience[] = []): ExperienceData[] {
   return raw
-    .filter((item) => item.kind && item.period)
-    .map((item, index) => ({
-      _id: item._id,
-      kind: item.kind as "career" | "education",
-      company: item.company,
-      institution: item.institution,
-      role: item.role,
-      degree: item.degree,
-      period: item.period as string,
-      location: item.location,
-      image: item.image,
-      bullets: item.bullets ?? [],
-      links: item.links ?? []
-    }));
+    .filter((item) => item.kind)
+    .map((item) => {
+      const { range, duration } = formatPeriod(item.period);
+
+      return {
+        _id: item._id,
+        kind: item.kind as "career" | "education",
+        company: item.company,
+        institution: item.institution,
+        role: item.role,
+        degree: item.degree,
+        period: range,
+        duration,
+        location: item.location,
+        image: item.image,
+        bullets: item.bullets ?? [],
+        links: item.links ?? [],
+      };
+    });
 }
 
 function normalizeRecognitions(raw: RawRecognition[] = []): RecognitionData[] {
