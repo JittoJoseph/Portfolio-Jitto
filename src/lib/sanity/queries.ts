@@ -23,6 +23,7 @@ type RawProfile = {
   enablePixelCompanion?: boolean;
   showCodeActivity?: boolean;
   showExperienceDetails?: boolean;
+  showExperienceDuration?: boolean;
 };
 
 type RawSocials = {
@@ -76,7 +77,8 @@ const profileQuery = `*[_type == "profile" && _id == "profile-main"][0]{
   "headshotUrl": headshot.asset->url,
   enablePixelCompanion,
   showCodeActivity,
-  showExperienceDetails
+  showExperienceDetails,
+  showExperienceDuration
 }`;
 
 const socialsQuery = `*[_type == "socials" && _id == "socials-main"][0]{
@@ -143,6 +145,7 @@ function normalizeProfile(raw?: RawProfile | null): ProfileData | null {
     enablePixelCompanion: raw.enablePixelCompanion ?? false,
     showCodeActivity: raw.showCodeActivity ?? true,
     showExperienceDetails: raw.showExperienceDetails ?? true,
+    showExperienceDuration: raw.showExperienceDuration ?? true,
   };
 }
 

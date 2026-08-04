@@ -10,10 +10,12 @@ export default function ExperienceTabs({
   career,
   education,
   showExperienceDetails,
+  showExperienceDuration,
 }: {
   career: ExperienceData[];
   education: ExperienceData[];
   showExperienceDetails: boolean;
+  showExperienceDuration: boolean;
 }) {
   const [activeTab, setActiveTab] = useState<"work" | "education">("work");
 
@@ -75,7 +77,7 @@ export default function ExperienceTabs({
                     {item.period && (
                       <p className="text-[13px] font-medium leading-5 text-zinc-300">
                         {item.period}
-                        {item.duration && (
+                        {showExperienceDuration && item.duration && (
                           <span className="font-normal text-zinc-500">
                             {" · "}
                             {item.duration}

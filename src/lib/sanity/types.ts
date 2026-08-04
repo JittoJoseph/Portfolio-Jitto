@@ -13,6 +13,7 @@ export type ProfileData = {
   enablePixelCompanion: boolean;
   showCodeActivity: boolean;
   showExperienceDetails: boolean;
+  showExperienceDuration: boolean;
 };
 
 export type SocialsData = {

@@ -40,10 +40,15 @@ function formatUnits(value: number, singular: string, plural: string): string {
   return `${value} ${value === 1 ? singular : plural}`;
 }
 
-export function formatPeriodRange(period?: ExperiencePeriod | null): string | null {
+export function formatPeriodRange(
+  period?: ExperiencePeriod | null,
+): string | null {
   if (!period) return null;
 
-  const start = formatPoint(toMonth(period.startMonth), toYear(period.startYear));
+  const start = formatPoint(
+    toMonth(period.startMonth),
+    toYear(period.startYear),
+  );
 
   if (period.isPresent) return start ? `${start} - Present` : "Present";
 
@@ -51,7 +56,7 @@ export function formatPeriodRange(period?: ExperiencePeriod | null): string | nu
 
   if (start && end) return `${start} - ${end}`;
   if (start) return start;
-  if (end) return `Until ${end}`;
+  if (end) return end;
   return null;
 }
 
@@ -66,7 +71,9 @@ export function formatPeriodDuration(
   if (!startYear || !endYear) return null;
 
   const startMonth = toMonth(period.startMonth);
-  const endMonth = period.isPresent ? now.getMonth() + 1 : toMonth(period.endMonth);
+  const endMonth = period.isPresent
+    ? now.getMonth() + 1
+    : toMonth(period.endMonth);
 
   if (!startMonth || !endMonth) {
     const years = endYear - startYear;
@@ -92,6 +99,8 @@ export function formatPeriod(period?: ExperiencePeriod | null, now?: Date) {
 
   return {
     range: range ?? undefined,
-    duration: range ? (formatPeriodDuration(period, now) ?? undefined) : undefined,
+    duration: range
+      ? (formatPeriodDuration(period, now) ?? undefined)
+      : undefined,
   };
 }

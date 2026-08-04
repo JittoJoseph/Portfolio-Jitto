@@ -125,6 +125,7 @@ export default async function Home() {
               career={data.career}
               education={data.education}
               showExperienceDetails={data.profile.showExperienceDetails}
+              showExperienceDuration={data.profile.showExperienceDuration}
             />
           </section>
 

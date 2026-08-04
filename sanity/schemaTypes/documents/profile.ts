@@ -22,7 +22,7 @@ export const profileType = defineType({
       name: "tagline",
       title: "Tagline",
       type: "string",
-      description: "Use {age} placeholder (e.g. {age}yo Software Engineer...)",
+      description: "Use {age} as a placeholder, e.g. {age}yo Software Engineer.",
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -40,26 +40,28 @@ export const profileType = defineType({
     }),
     defineField({
       name: "showCodeActivity",
-      title: "Show code activity section",
+      title: "Show code activity",
       type: "boolean",
-      description:
-        "Enable or disable the GitHub code activity section on the landing page.",
       initialValue: true,
     }),
     defineField({
       name: "showExperienceDetails",
-      title: "Show work experience bullets and links",
+      title: "Show work bullets and links",
       type: "boolean",
-      description:
-        "When disabled, work experience items show only the header and link to the first configured link. Education is not affected.",
+      description: "Education always shows its details.",
+      initialValue: true,
+    }),
+    defineField({
+      name: "showExperienceDuration",
+      title: "Show duration next to dates",
+      type: "boolean",
+      description: "For example 1 yr 3 mos.",
       initialValue: true,
     }),
     defineField({
       name: "enablePixelCompanion",
       title: "Enable pixel companion",
       type: "boolean",
-      description:
-        "Enable the lightweight Bob pixel companion overlay. Disabled by default for performance and a cleaner portfolio.",
       initialValue: false,
     }),
   ],
